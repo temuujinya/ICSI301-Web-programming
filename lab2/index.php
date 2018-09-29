@@ -37,21 +37,50 @@ $students = array(
     "program"=>"SE",
     "courses"=>[]
   ),
+  "16b1seas3372"=>array(
+    "fname"=>"Амархүү",
+    "lname"=>"Ган-Эрдэнэ",
+    "sisiID"=>"16b1seas3372",
+    "program"=>"SE",
+    "courses"=>[]
+  ),
+  "16b1seas3373"=>array(
+    "fname"=>"Явуухулан",
+    "lname"=>"Эрдэнэ",
+    "sisiID"=>"16b1seas3373",
+    "program"=>"SE",
+    "courses"=>[]
+  ),
+  "16b1seas3373"=>array(
+    "fname"=>"Нисдэг луу",
+    "lname"=>"Артан-Эрдэнэ",
+    "sisiID"=>"16b1seas3373",
+    "program"=>"SE",
+    "courses"=>[]
+  ),
+  "16b1seas3373"=>array(
+    "fname"=>"Абуу",
+    "lname"=>"Ястай",
+    "sisiID"=>"16b1seas3373",
+    "program"=>"SE",
+    "courses"=>[]
+  ),
 );
-
 
 array_push($students["16b1seas3369"]["courses"],"ICSI201");
 array_push($students["16b1seas3370"]["courses"],"ICSI201");
+var_dump($students);
 
-$displayAllStudents=$_POST["displayAllStudents"];
-$studentName =$_GET["searchStudentByLname"];
 
-if(isset($studentName)){
+
+if(isset($_GET["searchStudentByLname"])){
+  $studentName =$_GET["searchStudentByLname"];
   $foundStudents=findStudentByName($students,$studentName);
   if($foundStudents!=0)displayStudentsInformation($foundStudents,$courses);  
 }
 
-if(isset($displayAllStudents)){
+if(isset($_POST["displayAllStudents"])){
+  $displayAllStudents=$_POST["displayAllStudents"];
   displayStudentsInformation($students,$courses);
 }
 

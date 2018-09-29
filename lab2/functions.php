@@ -17,10 +17,13 @@ function findStudentByName($students,$studentName){
           Returns the position of where the needle exists relative to the beginnning of the haystack 
           string (independent of offset). Also note that string positions start at 0, and not 1.
           Returns FALSE if the needle was not found.
-      */        
-      //0==NULL ->TRUE
-      if(stripos($student["fname"],$studentName)!==false){
-        echo $studet["fname"];
+             
+      0==NULL ->TRUE
+      stripos (mb_stripos should be used instead)
+      mb_stripos — Finds position of first occurrence of a string within another, case insensitive
+      Unlike mb_strpos(), mb_stripos() is case-insensitive. If needle is not found, it returns FALSE.
+      */
+      if(mb_stripos($student["fname"],$studentName,0, 'UTF-8')!==false){
         $foundStudents[]=$student;
       }
     }
@@ -49,19 +52,22 @@ function findStudentByName($students,$studentName){
 өгч болно.
 */
 function displayStudentsInformation($students,$courses){
-  echo "
-  <table border='1'>
+  //Ингэж зарлахгүй болохоор global variable болгохгүй бол 
+  //Undefined variable алдаа гараад байна
+  $source="";
+  $source.= "<table border='1'>
     <tr>
       <td>Sisi ID</td>
       <td>Lname</td>
       <td>Fname</td>
       <td>Program</td>
       <td>Courses</td>
-    </tr>
-      ";
-  
+    </tr>";
+sort($students);
+
   foreach($students as $student){
-    $html .= "<tr>
+    
+    $source .= "<tr>
                 <td>".$student["sisiID"]."</td>
                 <td>".$student["lname"]."</td>
                 <td>".$student["fname"]."</td>
@@ -69,14 +75,14 @@ function displayStudentsInformation($students,$courses){
                 <td>";
   
                 foreach($student["courses"] as $course){
-                  $html .= $courses[$course]["name"].", ";
+                  $source .= $courses[$course]["name"].", ";
                 }
   
-      $html .= "</td>";
+      $source .= "</td>";
     
   }
-  echo $html.="</table>";
-  
+  $source.="</table>";
+  echo $source;
 }
 /*
 SISI ID болон сонгосон хичээлүүдийг параметртээ авч оюутны мэдээллийг 
@@ -85,6 +91,7 @@ SISI ID болон сонгосон хичээлүүдийг параметрт�
 параметр болгон өөрчилнө. Функцийг туршихад тогтмол утга өгөөд шалгаж болно.
 */
 function addCoursesIntoStudent($students,$studentSisiId, $studentNewCourses,$courses){
+  //сиси айдигаар нь key хийж оруулсан болохоор хамаа алга
   if(array_key_exists($studentSisiId,$students)){
     foreach($studentNewCourses as $studentCourse){
       // $students[$studentSisiId]["courses"]=$studentCourse;
