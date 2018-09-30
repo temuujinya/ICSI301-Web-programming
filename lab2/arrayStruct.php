@@ -6,8 +6,23 @@ $courses = [
     "credit"=>3
   ],
   "ICSI202"=>[
-    "name"=>"WOW32",
+    "name"=>"Өгөгдлийн бүтэц",
     "ID"=>"ICSI202",
+    "credit"=>3
+  ],
+  "ICSI203"=>[
+    "name"=>"Магадлал статистик",
+    "ID"=>"ICSI203",
+    "credit"=>3
+  ],
+  "ICSI301"=>[
+    "name"=>"Веб програмчлал",
+    "ID"=>"ICSI301",
+    "credit"=>3
+  ],
+  "ICSI432"=>[
+    "name"=>"Компьютер график",
+    "ID"=>"ICSI432",
     "credit"=>3
   ],
   ];
@@ -49,17 +64,17 @@ $students = array(
     "program"=>"SE",
     "courses"=>[]
   ),
-  "16b1seas3373"=>array(
+  "16b1seas3374"=>array(
     "fname"=>"Нисдэг луу",
     "lname"=>"Артан-Эрдэнэ",
-    "sisiID"=>"16b1seas3373",
+    "sisiID"=>"16b1seas3374",
     "program"=>"SE",
     "courses"=>[]
   ),
-  "16b1seas3373"=>array(
+  "16b1seas3375"=>array(
     "fname"=>"Абуу",
     "lname"=>"Ястай",
-    "sisiID"=>"16b1seas3373",
+    "sisiID"=>"16b1seas3375",
     "program"=>"SE",
     "courses"=>[]
   ),

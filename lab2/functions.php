@@ -29,13 +29,13 @@ function findStudentByName($students,$studentName){
     }
 
     if(count($foundStudents)===0){
-      echo "Ийм нэртэй оюутан байхгүй";
-      return 0;
+      echo "<div class='alert alert-danger' role='alert'>Ийм нэртэй оюутан байхгүй</div>";
+      exit();
     }
   }
   else{
-    echo "Оюутны нэр оруул.";
-    return 0;
+    echo "<div class='alert alert-danger' role='alert'>Оюутны нэр оруул.</div>";
+    exit();
   }
     return $foundStudents;
 }
@@ -56,14 +56,16 @@ function displayStudentsInformation($students,$courses){
   //Ингэж зарлахгүй болохоор global variable болгохгүй бол 
   //Undefined variable алдаа гараад байна
   $source="";
-  $source.= "<table border='1'>
+  $source.= "<table class='table table-hover' >
+  <thead>
     <tr>
       <td>Sisi ID</td>
       <td>Lname</td>
       <td>Fname</td>
       <td>Program</td>
       <td>Courses</td>
-    </tr>";
+    </tr>
+  </thead>";
 
 // function cmpAlphabetically($a,$b){
 //   if ($a["lname"]==$b["lname"]) return 0;
@@ -107,11 +109,11 @@ function addCoursesIntoStudent($students,$studentSisiId, $studentNewCourses,$cou
     }
     global $studentsFilePath;
     if(writeArrayIntoFile($studentsFilePath,$students)){
-      echo "Амжилттай нэмэгдлэ";
+      echo "<div class='alert alert-success' role='alert'>Амжилттай нэмэгдлэ</div>";
     }
   }else{
-    echo "Оюутны сиси айди буруу байна";
-    exit();
+    echo "<div class='alert alert-danger' role='alert'>Оюутны сиси айди буруу байна</div>";
+ 
   }
 }
 
