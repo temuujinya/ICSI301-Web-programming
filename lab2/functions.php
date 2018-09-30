@@ -1,5 +1,5 @@
 <?php
-
+include './configure/conf.php';
 /*
 Оюутны хүснэгт, оюутны нэрийг параметр болгон авч оюутны нэрээр хайж тохирох оюутны/оюутнуудын 
 мэдээллийг бүхэлд (хүснэгтийн нэгж элементээр) нь буцаадаг функц бич. Хайх оюутны нэр нь заавал 
@@ -28,7 +28,7 @@ function findStudentByName($students,$studentName){
       }
     }
 
-    if(count($foundStudents)==NULL){
+    if(count($foundStudents)===0){
       echo "Ийм нэртэй оюутан байхгүй";
       return 0;
     }
@@ -38,7 +38,7 @@ function findStudentByName($students,$studentName){
     return 0;
   }
     return $foundStudents;
-  }
+}
   
   
 /*
@@ -51,6 +51,7 @@ function findStudentByName($students,$studentName){
 утга авах шаардлагагүй. Функцийн ажиллагааг шалгахын тулд тогтмол утгууд 
 өгч болно.
 */
+
 function displayStudentsInformation($students,$courses){
   //Ингэж зарлахгүй болохоор global variable болгохгүй бол 
   //Undefined variable алдаа гараад байна
@@ -63,6 +64,12 @@ function displayStudentsInformation($students,$courses){
       <td>Program</td>
       <td>Courses</td>
     </tr>";
+
+// function cmpAlphabetically($a,$b){
+//   if ($a["lname"]==$b["lname"]) return 0;
+//   return strcmp($a["lname"], $b["lname"]);
+// }
+// usort($array, "cmpAlphabetically");
 sort($students);
 
   foreach($students as $student){
@@ -98,11 +105,78 @@ function addCoursesIntoStudent($students,$studentSisiId, $studentNewCourses,$cou
       array_push($students[$studentSisiId]["courses"],$studentCourse);
 
     }
-    displayStudentsInformation($students,$courses);
+    global $studentsFilePath;
+    if(writeArrayIntoFile($studentsFilePath,$students)){
+      echo "Амжилттай нэмэгдлэ";
+    }
   }else{
     echo "Оюутны сиси айди буруу байна";
     exit();
   }
 }
+
+
+function readArrayFromFile($filePath){
+  if(checkFile($filePath,'r')===true){
+    return json_decode(file_get_contents($filePath), true);
+  }
+  
+}
+
+function writeArrayIntoFile($filePath,$array){
+  if(checkFile($filePath,"w")===true){
+    file_put_contents($filePath,  json_encode($array));
+    return true;
+  }
+}
+
+
+
+/*
+  Courses, Students JSON файлуудад arrayStruct.php -г гарааны утга болгон өгөх
+  функц
+*/
+function initFilesWithJsons(){
+  include 'arrayStruct.php';
+  global $studentsFilePath, $coursesFilePath;
+  writeArrayIntoFile($studentsFilePath,$students);
+  writeArrayIntoFile($coursesFilePath,$courses);
+}
+
+/*
+Файл шалгах функц
+readArrayFromFile, writeArrayIntoFile функцд файл нь байгаа эрх нь байгаа эсэхийг
+шалгахад ашиглаж байгаа.
+*/
+function checkFile($filePath,$type){
+  if(is_file($filePath)){
+    if(file_exists($filePath)){
+      if(stripos($type,"r")!==FAlSE){
+        if(is_readable($filePath)){
+          return true;
+        }else{
+          echo "Юу байгааг нь уншиж чдку байнашд. Тийм эрх нь ч алга.";
+        }
+      }else if(stripos($type,"w")!==FAlSE){
+        
+        if(is_writable($filePath)){
+          return true;
+        }else{
+          echo "Надад энэ файл дээр чинь бичих эрх алгаа";
+        }
+      }else{
+        echo "Унших гээд байна уу, бичих гээд байна уу хө?";
+      }
+    }else{
+      echo "Ийм файл байхгүй байна";
+    }
+  }else{
+    echo "Энэ чинь файл биш байна. <br/>";
+    if(is_dir($filePath)){
+      echo "директорыг би уншиж бичиж чадахгүй хө";
+    }
+  }
+}
+
 
   ?>
