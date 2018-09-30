@@ -1,9 +1,9 @@
 ## Structure
 1. /configure
-   2. conf.php
+ * conf.php
 2. /data
-  2.1 courses.json
-  2.2 students.json
+ * courses.json
+ * students.json
 3. arrayStrict.php
 4. file.php
 5. functions.php
