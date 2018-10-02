@@ -81,10 +81,10 @@ sort($students);
                 <td>".$student["lname"]."</td>
                 <td>".$student["fname"]."</td>
                 <td>".$student["program"]."</td>
-                <td>";
-  
+                <td><ol>";
+
                 foreach($student["courses"] as $course){
-                  $source .= $courses[$course]["name"].", ";
+                  $source .= "<li>".$courses[$course]["ID"] ." - ". $courses[$course]["name"]." " . $courses[$course]["credit"]." кр</li>";
                 }
   
       $source .= "</td>";
