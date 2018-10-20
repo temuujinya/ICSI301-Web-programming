@@ -1,4 +1,7 @@
-<img class="justify-content-center mb-5 mt-5" src="images/fl-logo.svg" alt="">
+<? include_once __DIR__."/../config.php";?>
+<div class="text-center">
+    <img class="justify-content-center mb-5 mt-5" src="<? echo $site_url;?>/public/uploads/img/logo.png" width="60%"  alt="">
+</div>
 <form action="/register" method="POST">
    <div class="form-group">
       <input type="text" class="form-control" required id="lastName" aria-describedby="lastName" placeholder="Овог" name="lName">

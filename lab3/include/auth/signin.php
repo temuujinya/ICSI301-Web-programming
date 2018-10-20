@@ -1,4 +1,7 @@
-<img class="justify-content-center mb-5 mt-5" src="images/fl-logo.svg" alt="">
+<? include_once __DIR__."/../config.php";?>
+<div class="text-center">
+    <img class="justify-content-center mb-5 mt-5" src="<? echo $site_url;?>/public/uploads/img/logo.png" width="60%"  alt="">
+</div>
 <form action="/login" method="POST">
    <div class="form-group">
       <!--<label for="loginEmail">Цахим шуудан</label>-->
