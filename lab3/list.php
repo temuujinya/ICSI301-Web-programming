@@ -1,5 +1,5 @@
 <?php
-    include_once "./conf/partials/header.php";
+    include_once __DIR__."/include/partials/header.php";
 ?>
 
 <?php 
@@ -40,5 +40,5 @@
     echo $render;
 ?>
 <?php
-    include "./conf/partials/footer.php";
+    include "./include/partials/footer.php";
 ?>

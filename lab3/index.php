@@ -1,6 +1,6 @@
 <?php
 // include "./conf/db.php";
-require_once "./conf/db.php";
+require_once __DIR__."/include/db.php";
 
 $query = "select * from student";
 $result = $db->query($query);

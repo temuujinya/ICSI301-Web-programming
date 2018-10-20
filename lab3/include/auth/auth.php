@@ -1,3 +1,4 @@
+<? include __DIR__."/../partials/header.php";?>
 <div class="container">
    <!-- Content here -->
    <div class="row justify-content-center mt-5 pt-5">
@@ -21,3 +22,4 @@
       </div>
    </div>
 </div>
+<? include __DIR__."/../partials/footer.php";?>
