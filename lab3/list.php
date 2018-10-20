@@ -5,16 +5,17 @@
 <?php 
     $students="select * from student";
     $result= $db->query($students);
-    $render = "<table>
-    <tr>
-        <td>Хувийн дугаар</td>
-        <td>Овог</td>
-        <td>Нэр</td>
-        <td>Хүйс</td>
-        <td>Төрсөн огноо</td>
-        <td>Хөтөлбөр</td>
-        <td></td>
-    </tr>";
+    $render = "<a href='./insert.php'>Оюутан нэмэх</a>";
+    $render .= "<table>
+        <tr>
+            <td>Хувийн дугаар</td>
+            <td>Овог</td>
+            <td>Нэр</td>
+            <td>Хүйс</td>
+            <td>Төрсөн огноо</td>
+            <td>Хөтөлбөр</td>
+            <td></td>
+        </tr>";
 
     while($student = $result->fetch_assoc()){
         $tempStudent = $student;
