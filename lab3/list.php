@@ -39,9 +39,10 @@
                     <form method='get' action='edit.php?s_id={$student["studentID"]}'>
                         <button>Засах</button>
                     </form>
-                    <form method='get' action='delete.php?s_id={$student["studentID"]}'>
-                        <button>Устгах</button>
+                    <form method='get' action='delete.php'>
+                        <button name='s_id' value='{$student["studentID"]}'>Устгах</button>
                     </form>
+                    <a href='delete.php?s_id={$student["studentID"]}'>del</a>
                 </td>
             </tr>";
     }
