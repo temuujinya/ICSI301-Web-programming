@@ -2,13 +2,10 @@
     include "./conf/partials/header.php";
  
     if(isset($_POST["save"])){
+        //PHP PREPARED STATEMENT(help for escape sql injection)
         $update =$db->prepare("update student set studentID=?,lastName=?,firstName=?,gender=?,dob=?,programIndex=?, password=? where studentID=?");
         //TODO: oilgo
         //https://stackoverflow.com/questions/18316501/php-update-prepared-statement
-        if($update===false){
-            trigger_error($this->mysqli->error, E_USER_ERROR);
-            return;
-        }
         
         // The argument may be one of four types:
         //     i - integer

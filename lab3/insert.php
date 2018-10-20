@@ -3,10 +3,6 @@
     if(isset($_POST['insert'])){
         $insert = $db->prepare("insert into student (studentID, lastName, firstName, gender,
                         dob, programIndex,password) values (?,?,?,?,?,?,?)");
-        if($insert===false){
-            trigger_error($this->mysqli->error, E_USER_ERROR);
-            return;
-        }
 
         $insert->bind_param('sssssss',
                             $_POST['studentID'],
