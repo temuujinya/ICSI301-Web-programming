@@ -174,7 +174,7 @@
       triggerTransitionEnd: function triggerTransitionEnd(element) {
         $$$1(element).trigger(TRANSITION_END);
       },
-      // TODO: Remove in v5
+      // T0DO: Remove in v5
       supportsTransitionEnd: function supportsTransitionEnd() {
         return Boolean(TRANSITION_END);
       },
@@ -1508,7 +1508,7 @@
     if (element.nodeType !== 1) {
       return [];
     }
-    // NOTE: 1 DOM access here
+    // : 1 DOM access here
     var css = getComputedStyle(element, null);
     return property ? css[property] : css;
   }
@@ -1596,7 +1596,7 @@
 
     var noOffsetParent = isIE(10) ? document.body : null;
 
-    // NOTE: 1 DOM access here
+    // : 1 DOM access here
     var offsetParent = element.offsetParent;
     // Skip hidden elements which don't have an offsetParent
     while (offsetParent === noOffsetParent && element.nextElementSibling) {
@@ -2016,7 +2016,7 @@
   function getBoundaries(popper, reference, padding, boundariesElement) {
     var fixedPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
 
-    // NOTE: 1 DOM access here
+    // : 1 DOM access here
 
     var boundaries = { top: 0, left: 0 };
     var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
@@ -3201,7 +3201,7 @@
       boundariesElement = getOffsetParent(boundariesElement);
     }
 
-    // NOTE: DOM access here
+    // : DOM access here
     // resets the popper's position so that the document size can be calculated excluding
     // the size of the popper element itself
     var transformProp = getSupportedPropertyName('transform');
@@ -3216,7 +3216,7 @@
 
     var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement, data.positionFixed);
 
-    // NOTE: DOM access here
+    // : DOM access here
     // restores the original style properties after the offsets have been computed
     popperStyles.top = top;
     popperStyles.left = left;
@@ -4807,7 +4807,7 @@
         }
       }; // ----------------------------------------------------------------------
       // the following methods are used to handle overflowing modals
-      // todo (fat): these should probably be refactored out of modal.js
+      // to0do (fat): these should probably be refactored out of modal.js
       // ----------------------------------------------------------------------
 
 
@@ -4838,7 +4838,7 @@
         var _this9 = this;
 
         if (this._isBodyOverflowing) {
-          // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
+          // : DOMNode.style.paddingRight returns the actual value or '' if not set
           //   while $(DOMNode).css('padding-right') returns the calculated value or 0 if not set
           var fixedContent = [].slice.call(document.querySelectorAll(Selector.FIXED_CONTENT));
           var stickyContent = [].slice.call(document.querySelectorAll(Selector.STICKY_CONTENT)); // Adjust fixed content padding
@@ -5963,7 +5963,7 @@
             var targetBCR = target.getBoundingClientRect();
 
             if (targetBCR.width || targetBCR.height) {
-              // TODO (fat): remove sketch reliance on jQuery position/offset
+              // TOD0O (fat): remove sketch reliance on jQuery position/offset
               return [$$$1(target)[offsetMethod]().top + offsetBase, targetSelector];
             }
           }

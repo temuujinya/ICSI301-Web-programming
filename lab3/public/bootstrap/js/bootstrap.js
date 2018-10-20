@@ -175,7 +175,7 @@
       triggerTransitionEnd: function triggerTransitionEnd(element) {
         $$$1(element).trigger(TRANSITION_END);
       },
-      // TODO: Remove in v5
+      // TO0DO: Remove in v5
       supportsTransitionEnd: function supportsTransitionEnd() {
         return Boolean(TRANSITION_END);
       },
@@ -2290,7 +2290,7 @@
         }
       }; // ----------------------------------------------------------------------
       // the following methods are used to handle overflowing modals
-      // todo (fat): these should probably be refactored out of modal.js
+      // tod0 (fat): these should probably be refactored out of modal.js
       // ----------------------------------------------------------------------
 
 
@@ -2321,7 +2321,7 @@
         var _this9 = this;
 
         if (this._isBodyOverflowing) {
-          // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
+          // : DOMNode.style.paddingRight returns the actual value or '' if not set
           //   while $(DOMNode).css('padding-right') returns the calculated value or 0 if not set
           var fixedContent = [].slice.call(document.querySelectorAll(Selector.FIXED_CONTENT));
           var stickyContent = [].slice.call(document.querySelectorAll(Selector.STICKY_CONTENT)); // Adjust fixed content padding
@@ -3446,7 +3446,7 @@
             var targetBCR = target.getBoundingClientRect();
 
             if (targetBCR.width || targetBCR.height) {
-              // TODO (fat): remove sketch reliance on jQuery position/offset
+              // TOD0 (fat): remove sketch reliance on jQuery position/offset
               return [$$$1(target)[offsetMethod]().top + offsetBase, targetSelector];
             }
           }
