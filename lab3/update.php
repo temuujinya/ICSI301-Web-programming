@@ -36,27 +36,26 @@
         $s_id = $_GET["s_id"];
         $getStudent = "select * from student where studentID='{$s_id}'";
         $result=$db->query($getStudent);
-        while($student = $result->fetch_assoc()){
-            // TODO: gender to selection or option &&  program
-            echo "
-                <form method='post' action='#'>
-                    <label for='studentID'>Хувийн дугаар</label>
-                    <input type='text' id='studentID' name='studentID' value='{$student['studentID']}'/>
-                    <label for='lastName'>Нэр</label>
-                    <input type='text' id='lastName' name='lastName' value='{$student['lastName']}'/>
-                    <label for='lastName'>Овог</label>                    
-                    <input type='text' id='lastName' name='firstName' value='{$student['firstName']}'/>
-                    <label for='gender'>Хүйс</label>                                        
-                    <input type='text' id='gender' name='gender' value='{$student['gender']}'/>
-                    <label for='dob'>Төрсөн огноо</label>                                                            
-                    <input type='date' id='dob' name='dob' value='{$student['dob']}'/>
-                    <label for='programIndex'>Хөтөлбөр</label>                                        
-                    <input type='text' id='programIndex' name='programIndex' value='{$student['programIndex']}'/>
-                    <label for='gender'>Нууц үг</label>                                        
-                    <input type='password' id='password' name='password' value='{$student['password']}'/>
-                    <button name='save'>Хадгалах</button>
-                </form>
-            ";
+        $student = $result->fetch_assoc();
+        // TODO: gender to selection or option &&  program
+        echo "
+            <form method='post' action='#'>
+                <label for='studentID'>Хувийн дугаар</label>
+                <input type='text' id='studentID' name='studentID' value='{$student['studentID']}'/>
+                <label for='lastName'>Нэр</label>
+                <input type='text' id='lastName' name='lastName' value='{$student['lastName']}'/>
+                <label for='lastName'>Овог</label>                    
+                <input type='text' id='lastName' name='firstName' value='{$student['firstName']}'/>
+                <label for='gender'>Хүйс</label>                                        
+                <input type='text' id='gender' name='gender' value='{$student['gender']}'/>
+                <label for='dob'>Төрсөн огноо</label>                                                            
+                <input type='date' id='dob' name='dob' value='{$student['dob']}'/>
+                <label for='programIndex'>Хөтөлбөр</label>                                        
+                <input type='text' id='programIndex' name='programIndex' value='{$student['programIndex']}'/>
+                <label for='gender'>Нууц үг</label>                                        
+                <input type='password' id='password' name='password' value='{$student['password']}'/>
+                <button name='save'>Хадгалах</button>
+            </form>
+        ";
         }
-    }
 ?>

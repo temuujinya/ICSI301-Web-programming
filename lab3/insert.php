@@ -20,7 +20,7 @@
         header("Location: ./list.php");
         exit();
     }
-
+    // TODO: gender to selection or option &&  program
     echo "
         <form method='post' action='#'>
             <label for='studentID'>Хувийн дугаар</label>
