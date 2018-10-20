@@ -26,8 +26,8 @@
                 <td>{$tempStudent["dob"]}</td>
                 <td>{$tempStudent["programIndex"]}</td>
                 <td>
-                    <form method='get' action='edit.php?s_id={$tempStudent["studentID"]}'>
-                        <button>Засах</button>
+                    <form method='get' action='update.php'>
+                        <button name='s_id' value='{$tempStudent["studentID"]}'>Засах</button>
                     </form>
                     <form method='get' action='delete.php'>
                         <button name='s_id' value='{$tempStudent["studentID"]}'>Устгах</button>
