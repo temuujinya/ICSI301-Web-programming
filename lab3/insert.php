@@ -1,5 +1,5 @@
 <?php
-    include __DIR__."/conf/partials/header.php";
+    include_once __DIR__."/conf/partials/header.php";
     if(isset($_POST['insert'])){
         $insert = $db->prepare("insert into student (studentID, lastName, firstName, gender,
                         dob, programIndex,password) values (?,?,?,?,?,?,?)");

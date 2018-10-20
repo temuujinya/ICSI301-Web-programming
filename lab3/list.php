@@ -1,5 +1,5 @@
 <?php
-    include "./conf/partials/header.php";
+    include_once "./conf/partials/header.php";
 ?>
 
 <?php 

@@ -1,5 +1,5 @@
 <?php
-    include "./conf/partials/header.php";
+    include_once "./conf/partials/header.php";
  
     if(isset($_POST["save"])){
         //PHP PREPARED STATEMENT(help for escape sql injection)
