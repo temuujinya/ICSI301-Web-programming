@@ -1,18 +1,7 @@
 <?php
-    require "./conf/db.php";
+    include "./conf/partials/header.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="mn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Оюутны жагсаалт</title>
-    <link rel="stylesheet" href="./public/style/main.css"/>
-</head>
-<body>
-    
 <?php 
     $students="select * from student";
     $result= $db->query($students);
@@ -49,6 +38,6 @@
     $render.="</table>";
     echo $render;
 ?>
-
-</body>
-</html>
+<?php
+    include "./conf/partials/footer.php";
+?>
