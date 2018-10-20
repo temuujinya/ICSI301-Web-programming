@@ -28,21 +28,21 @@
     </tr>";
 
     while($student = $result->fetch_assoc()){
+        $tempStudent = $student;
         $render.= "<tr>
-                <td>{$student["studentID"]}</td>
-                <td>{$student["lastName"]}</td>
-                <td>{$student["firstName"]}</td>
-                <td>{$student["gender"]}</td>
-                <td>{$student["dob"]}</td>
-                <td>{$student["programIndex"]}</td>
+                <td>{$tempStudent["studentID"]}</td>
+                <td>{$tempStudent["lastName"]}</td>
+                <td>{$tempStudent["firstName"]}</td>
+                <td>{$tempStudent["gender"]}</td>
+                <td>{$tempStudent["dob"]}</td>
+                <td>{$tempStudent["programIndex"]}</td>
                 <td>
-                    <form method='get' action='edit.php?s_id={$student["studentID"]}'>
+                    <form method='get' action='edit.php?s_id={$tempStudent["studentID"]}'>
                         <button>Засах</button>
                     </form>
                     <form method='get' action='delete.php'>
-                        <button name='s_id' value='{$student["studentID"]}'>Устгах</button>
+                        <button name='s_id' value='{$tempStudent["studentID"]}'>Устгах</button>
                     </form>
-                    <a href='delete.php?s_id={$student["studentID"]}'>del</a>
                 </td>
             </tr>";
     }
