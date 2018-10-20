@@ -37,6 +37,7 @@
             <input type='text' id='programIndex' name='programIndex' placeholder=''/>
             <label for='gender'>Нууц үг</label>                                        
             <input type='password' id='password' name='password' placeholder=''/>
+            <button type='clear'>Цэвэрлэх</button>
             <button name='insert'>Хадгалах</button>
         </form>
     ";
