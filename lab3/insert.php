@@ -1,10 +1,9 @@
 <?php
     include_once __DIR__."/include/partials/header.php";
     if(isset($_POST['insert'])){
-        $insert = $db->prepare("insert into student (studentID, lastName, firstName, gender,
+        $insert = mysqli_prepare($db,"insert into student (studentID, lastName, firstName, gender,
                         dob, programIndex,password) values (?,?,?,?,?,?,?)");
-
-        $insert->bind_param('sssssss',
+        mysqli_stmt_bind_param($insert,'sssssss',
                             $_POST['studentID'],
                             $_POST['lastName'],
                             $_POST['firstName'],
@@ -12,9 +11,9 @@
                             $_POST['dob'],
                             $_POST['programIndex'],
                             $_POST['password']);
-        $status=$insert->execute();
+        $status=mysqli_stmt_execute($insert);
         if($status === false){
-            trigger_error($insert->error, E_USER_ERROR);
+            trigger_error(mysqli_error(), E_USER_ERROR);
         }
 
         header("Location: ./list.php");

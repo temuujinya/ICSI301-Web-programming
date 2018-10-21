@@ -4,7 +4,7 @@
 
 <?php 
     $students="select * from student";
-    $result= $db->query($students);
+    $result= mysqli_query($db, $students);
     $render = "<a href='./insert.php'>Оюутан нэмэх</a>";
     $render .= "<table>
         <tr>
@@ -17,7 +17,7 @@
             <td></td>
         </tr>";
 
-    while($student = $result->fetch_assoc()){
+    while($student = mysqli_fetch_assoc($result)){
         $tempStudent = $student;
         $render.= "<tr>
                 <td>{$tempStudent["studentID"]}</td>
@@ -36,6 +36,8 @@
                 </td>
             </tr>";
     }
+    //free result set
+    mysqli_free_result($result);
     $render.="</table>";
     echo $render;
 ?>

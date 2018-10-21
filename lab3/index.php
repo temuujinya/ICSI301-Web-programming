@@ -3,13 +3,12 @@
 require_once __DIR__."/include/db.php";
 
 $query = "select * from student";
-$result = $db->query($query);
+$result = mysqli_query($db,$query);
 
 
-while($student = $result->fetch_assoc()){
+while($student = mysqli_fetch_assoc($result)){
     echo "{$student["firstName"]} bna <br/>";
 }
 
-$db->close();
-
+mysqli_close($db);
 ?>

@@ -3,7 +3,7 @@
  
     if(isset($_POST["save"])){
         //PHP PREPARED STATEMENT(help for escape sql injection)
-        $update =$db->prepare("update student set studentID=?,lastName=?,firstName=?,gender=?,dob=?,programIndex=?, password=? where studentID=?");
+        $update = mysqli_prepare($db,"update student set studentID=?,lastName=?,firstName=?,gender=?,dob=?,programIndex=?, password=? where studentID=?");
         //TODO: oilgo
         //https://stackoverflow.com/questions/18316501/php-update-prepared-statement
         
@@ -12,7 +12,7 @@
         //     d - double
         //     s - string
         //     b - BLOB
-        $update->bind_param('ssssssss',
+        mysqli_stmt_bind_param($update,'ssssssss',
                             $_POST['studentID'],
                             $_POST['lastName'],
                             $_POST['firstName'],
@@ -21,9 +21,9 @@
                             $_POST['programIndex'],
                             $_POST['password'], 
                             $_GET['s_id']);
-        $status=$update->execute();
+        $status=mysqli_stmt_execute($update);
         if ($status === false) {
-            trigger_error($update->error, E_USER_ERROR);
+            trigger_error(mysqli_error(), E_USER_ERROR);
         }
         /*
             Оюутны хувийн дугаарыг сольсон бол тухайд дугаараар нь дахин хандаж байна.
@@ -35,8 +35,8 @@
     if(isset($_GET["s_id"])){
         $s_id = $_GET["s_id"];
         $getStudent = "select * from student where studentID='{$s_id}'";
-        $result=$db->query($getStudent);
-        $student = $result->fetch_assoc();
+        $result=mysqli_query($db, $getStudent);
+        $student = mysqli_fetch_assoc($result);
         // TODO: gender to selection or option &&  program
         echo "
             <form method='post' action='#'>
