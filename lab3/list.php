@@ -1,11 +1,11 @@
 <?php
     include_once __DIR__."/include/partials/header.php";
 ?>
-
 <?php 
     $students="select * from student";
     $result= mysqli_query($db, $students);
-    $render = "<a href='./insert.php'>Оюутан нэмэх</a>";
+    $render = "<div class='container'>";
+    $render .= "<a href='./insert.php'>Оюутан нэмэх</a>";
     $render .= "<table>
         <tr>
             <td>Хувийн дугаар</td>
@@ -38,7 +38,8 @@
     }
     //free result set
     mysqli_free_result($result);
-    $render.="</table>";
+    $render.="</table>
+        </div>";
     echo $render;
 ?>
 <?php

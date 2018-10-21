@@ -1,8 +1,8 @@
 <?php
 // include "./conf/db.php";
 require_once __DIR__."/include/db.php";
-include_once __DIR__."/include/partials/header.php";
 require_once __DIR__."/include/config.php";
+include_once __DIR__."/include/partials/header.php";
 $invalidLogin="";
 
 if(isset($_POST["loginID"])){
@@ -29,6 +29,8 @@ if(isset($_POST["loginID"])){
 }
 else if(!isset($_COOKIE['studentID'])){
     require_once "include/auth/auth.php";
+}else{
+    require_once "list.php";
 }
 mysqli_close($db);
 
