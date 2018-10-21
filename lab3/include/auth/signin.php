@@ -1,19 +1,26 @@
-<? include_once __DIR__."/../config.php";?>
+<? 
+require_once __DIR__."/../config.php";
+?>
 <div class="text-center">
     <img class="justify-content-center mb-5 mt-5" src="<? echo $site_url;?>/public/uploads/img/logo.png" width="60%"  alt="">
 </div>
-<form action="/login" method="POST">
+ <?
+ echo $invalidLogin;
+ ?>
+<form action="<?echo $site_url;?>/" method="POST">
    <div class="form-group">
       <!--<label for="loginEmail">Цахим шуудан</label>-->
-      <input type="email" class="form-control" required id="loginEmail" aria-describedby="emailHelp" placeholder="Цахим хаяг/Хэрэглэгчийн нэр"/ name="email">
+      <input type="text" class="form-control" id="loginEmail" placeholder="Цахим хаяг/Хэрэглэгчийн нэр"/ name="loginID" required>
       <!--
          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
          -->
    </div>
    <div class="form-group">
       <!--<label for="loginPass">Нууц үг</label>-->
-      <input type="password" class="form-control" id="loginPass" placeholder="Нууц үг" name="password" required/>
+      <input type="password" class="form-control" id="loginPass" placeholder="Нууц үг" name="loginPass" required/>
+      <input type="hidden" name="login" />
    </div>
+
    <!--
       <div class="form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">

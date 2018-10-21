@@ -1,4 +1,6 @@
-<? include __DIR__."/../partials/header.php";?>
+<? include __DIR__."/../partials/header.php";
+
+?>
 <div class="container">
    <!-- Content here -->
    <div class="row justify-content-center mt-5 pt-5">
@@ -13,10 +15,10 @@
          </ul>
          <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="home-tab">
-                <? include_once "./signin.php" ?>
+                <? require_once __DIR__."/signin.php" ?>
             </div>
             <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="profile-tab">
-                <? include_once "./signup.php" ?>
+                <? include_once __DIR__."/signup.php" ?>
             </div>
          </div>
       </div>
