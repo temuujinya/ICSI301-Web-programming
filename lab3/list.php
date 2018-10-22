@@ -1,7 +1,8 @@
 <?php
+
+if(isset($_COOKIE['studentID'])){
     include_once __DIR__."/include/partials/header.php";
-?>
-<?php 
+
     $students="select * from student";
     $result= mysqli_query($db, $students);
     $render = "<div class='container'>";
@@ -43,5 +44,9 @@
     echo $render;
 ?>
 <?php
+
     include "./include/partials/footer.php";
+}else{
+    header("location: ./index.php");
+}
 ?>

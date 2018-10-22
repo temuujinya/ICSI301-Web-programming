@@ -1,4 +1,6 @@
 <?php 
+
+if(isset($_COOKIE['studentID'])){
     require_once "./include/db.php";
  
     if(isset($_GET["s_id"])){
@@ -11,5 +13,8 @@
     
     header("Location: ./list.php");
     exit();
+}else{
+    header("location: ./index.php");
+}
     
 ?>

@@ -1,4 +1,5 @@
 <?php
+if(isset($_COOKIE['studentID'])){
     include_once __DIR__."/include/partials/header.php";
     if(isset($_POST['insert'])){
         $insert = mysqli_prepare($db,"insert into student (studentID, lastName, firstName, gender,
@@ -12,7 +13,7 @@
                             $_POST['programIndex'],
                             $_POST['password']);
         $status=mysqli_stmt_execute($insert);
-        if($status === false){
+        if($status == false){
             trigger_error(mysqli_error(), E_USER_ERROR);
         }
 
@@ -40,5 +41,7 @@
             <button name='insert'>Хадгалах</button>
         </form>
     ";
-
+}else{
+    header("location: ./index.php");
+}
 ?>
