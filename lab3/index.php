@@ -30,7 +30,7 @@ if(isset($_POST["loginID"])){
 if(!isset($_COOKIE['studentID'])){
     require_once "include/auth/auth.php";
 }else{
-    require_once "list.php";
+    require_once "courses.php";
 }
 mysqli_close($db);
 

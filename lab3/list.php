@@ -8,18 +8,20 @@ if(isset($_COOKIE['studentID'])){
     $students="select * from student";
     mysqli_set_charset($db,"utf8");
     $result= mysqli_query($db, $students);
-    $render = "<div class='container'>";
-    $render .= "<a href='./insert.php'>Оюутан нэмэх</a>";
-    $render .= "<table>
-        <tr>
-            <td>Хувийн дугаар</td>
-            <td>Овог</td>
-            <td>Нэр</td>
-            <td>Хүйс</td>
-            <td>Төрсөн огноо</td>
-            <td>Хөтөлбөр</td>
-            <td></td>
-        </tr>";
+    $render = "<div class='container bg-light'>";
+    $render .= "<a class='btn btn-success btn-md' href='./insert.php'>Оюутан нэмэх</a>";
+    $render .= "<table class='table table-hover'>
+        <thead>
+            <tr>
+                <th scope='col'>Хувийн дугаар</th>
+                <th scope='col'>Овог</th>
+                <th scope='col'>Нэр</th>
+                <th scope='col'>Хүйс</th>
+                <th scope='col'>Төрсөн огноо</th>
+                <th scope='col'>Хөтөлбөр</th>
+                <th scope='col'></th>
+            </tr>
+        </thead>";
 
     while($student = mysqli_fetch_assoc($result)){
         $tempStudent = $student;
@@ -32,10 +34,10 @@ if(isset($_COOKIE['studentID'])){
                 <td>{$tempStudent["programIndex"]}</td>
                 <td>
                     <form method='get' action='update.php'>
-                        <button name='s_id' value='{$tempStudent["studentID"]}'>Засах</button>
+                        <button class='btn btn-success btn-sm' name='s_id' value='{$tempStudent["studentID"]}'>Засах</button>
                     </form>
                     <form method='get' action='delete.php'>
-                        <button name='s_id' value='{$tempStudent["studentID"]}'>Устгах</button>
+                        <button class='btn btn-danger btn-sm' name='s_id' value='{$tempStudent["studentID"]}'>Устгах</button>
                     </form>
                 </td>
             </tr>";

@@ -11,7 +11,7 @@
         <a class="nav-link" href="./">Нүүр хуудас <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="addnew.php">Оюутанд хичээл нэмэх</a>
+        <a class="nav-link" href="list.php">Оюутан жагсаалт</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>

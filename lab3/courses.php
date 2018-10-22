@@ -7,15 +7,17 @@ if(isset($_COOKIE['studentID'])){
     mysqli_set_charset($db,"utf8");    
     $result= mysqli_query($db,$getAllCourse);
 
-    $render = "<div class='container'>
+    $render = "<div class='container bg-light'>
         <form acion='#' method='post'>
-        <table>
-        <tr>
-            <th>Индекс</th>
-            <th>Хичээлийн нэр</th>
-            <th>Кердит</th>
-            <th>Сонгох</th>
-        </tr>
+        <table class='table table-hover'>
+        <thead>
+            <tr>
+                <th scope='col'>Индекс</th>
+                <th scope='col'>Хичээлийн нэр</th>
+                <th scope='col'>Кердит</th>
+                <th scope='col'>Сонгох</th>
+            </tr>
+        </thead>
         ";
 
         if(isset($_POST['selectCourse'])){
@@ -25,9 +27,9 @@ if(isset($_COOKIE['studentID'])){
         while($course = mysqli_fetch_assoc($result)){
             $render .= "<tr ";
             if(checkCourseTaken($course['courseIndex'],$_COOKIE['studentID'])){ 
-                $render .= "bgcolor='#eee'";
+                $render .= "class='bg-success text-light'";
             }
-            $render .="><td>{$course['courseIndex']}</td>
+            $render .="><th scope='row'>{$course['courseIndex']}</th>
                     <td>{$course['courseName']}</td>
                     <td>{$course['courseCredit']}</td>
                     <td><input type='checkbox' value='{$course['courseIndex']}' name='selectCourse[]' 
@@ -42,7 +44,8 @@ if(isset($_COOKIE['studentID'])){
 
         $render .="
             </table>
-            <button>Сонгох</button>
+            <button type='reset'class='btn btn-success btn-sm'>Цэвэрлэх</button>
+            <button class='btn btn-success btn-sm'>Сонгох</button>
             </form>
             </div>";
         echo $render;
