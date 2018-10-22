@@ -27,7 +27,7 @@ if(isset($_POST["loginID"])){
                         </div>";
     }
 }
-else if(!isset($_COOKIE['studentID'])){
+if(!isset($_COOKIE['studentID'])){
     require_once "include/auth/auth.php";
 }else{
     require_once "list.php";
