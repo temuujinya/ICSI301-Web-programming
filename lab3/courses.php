@@ -21,13 +21,19 @@ if(isset($_COOKIE['studentID'])){
     
         while($course = mysqli_fetch_assoc($result)){
             $render .= "<tr ";
-            if(checkCourseTaken($course['courseIndex'],"16b1seas3369")){ 
+            if(checkCourseTaken($course['courseIndex'],$_COOKIE['studentID'])){ 
                 $render .= "bgcolor='#eee'";
             }
             $render .="><td>{$course['courseIndex']}</td>
                     <td>{$course['courseName']}</td>
                     <td>{$course['courseCredit']}</td>
-                    <td><input type='checkbox' name=selectCourse[]/></td>
+                    <td><input type='checkbox' name='selectCourse[]' 
+                    ";
+                    
+            if(checkCourseTaken($course['courseIndex'],$_COOKIE['studentID'])){ 
+                $render .= "checked";
+            }
+            $render .="/></td>
                 </tr>";
         }
 
