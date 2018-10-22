@@ -57,7 +57,7 @@ INSERT INTO `course` (`courseIndex`, `courseName`, `courseCredit`) VALUES
 CREATE TABLE `courseTakenHistory` (
   `studentID` varchar(15) NOT NULL,
   `courseIndex` varchar(8) NOT NULL,
-  `takenDate` date NOT NULL
+  `takenDate` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -69,7 +69,7 @@ CREATE TABLE `courseTakenHistory` (
 CREATE TABLE `program` (
   `programIndex` varchar(8) NOT NULL,
   `programName` varchar(50) NOT NULL,
-  `issuedDate` date NOT NULL
+  `issuedDate` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -125,6 +125,7 @@ ALTER TABLE `course`
 -- Indexes for table `courseTakenHistory`
 --
 ALTER TABLE `courseTakenHistory`
+  ADD PRIMARY KEY (`studentID`,`courseIndex`),
   ADD KEY `FK_courseTakenHistoryStudentID` (`studentID`),
   ADD KEY `FK_courseTakenHistoryCourseIndex` (`courseIndex`);
 

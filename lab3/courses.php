@@ -18,6 +18,9 @@ if(isset($_COOKIE['studentID'])){
         </tr>
         ";
 
+        if(isset($_POST['selectCourse'])){
+            takeCourseByStudent($_POST['selectCourse']);
+        }
     
         while($course = mysqli_fetch_assoc($result)){
             $render .= "<tr ";
@@ -27,11 +30,11 @@ if(isset($_COOKIE['studentID'])){
             $render .="><td>{$course['courseIndex']}</td>
                     <td>{$course['courseName']}</td>
                     <td>{$course['courseCredit']}</td>
-                    <td><input type='checkbox' name='selectCourse[]' 
+                    <td><input type='checkbox' value='{$course['courseIndex']}' name='selectCourse[]' 
                     ";
                     
             if(checkCourseTaken($course['courseIndex'],$_COOKIE['studentID'])){ 
-                $render .= "checked";
+                $render .= "checked disabled";
             }
             $render .="/></td>
                 </tr>";

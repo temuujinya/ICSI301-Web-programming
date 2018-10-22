@@ -1,8 +1,11 @@
 <?php
 global $db;
-function checkCourseTaken($courseIndex,$studentIDs){
+$studentID = $_COOKIE["studentID"];
+function checkCourseTaken($courseIndex){
     global $db;
-    $checkQR="select * from courseTakenHistory where studentID ='{$studentIDs}' AND courseIndex='{$courseIndex}'";
+    global $studentID;
+    $checkQR="select * from courseTakenHistory where 
+        studentID ='{$studentID}' AND courseIndex='{$courseIndex}'";
     $checkQR = mysqli_query($db,$checkQR);
     if(!$checkQR){
         die("erro".mysqli_error($db));
@@ -12,4 +15,14 @@ function checkCourseTaken($courseIndex,$studentIDs){
     }
     return true;
 }
+
+function takeCourseByStudent($courses){
+    global $db;
+    global $studentID;
+    foreach($courses as $course){
+        $takeCourse = "insert into courseTakenHistory (studentID,courseIndex)
+        values ('{$studentID}','{$course}')";
+        mysqli_query($db,$takeCourse);
+    }
+    }
 ?>
