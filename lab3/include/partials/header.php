@@ -1,9 +1,6 @@
 <?php 
-require_once __DIR__ ."/../db.php"; 
 require_once __DIR__ ."/../config.php";
-if(isset($_COOKIE["studentID"])){
-    include_once __DIR__."/navbar.php";
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="mn">
@@ -16,3 +13,7 @@ if(isset($_COOKIE["studentID"])){
   <link rel="stylesheet" href="<? echo $site_url;?>/public/style/main.css"/>
 </head>
 <body>
+<?
+if(isset($_COOKIE["studentID"])){
+  include_once __DIR__."/navbar.php";
+}?>

@@ -1,9 +1,12 @@
 <?php
 
 if(isset($_COOKIE['studentID'])){
+
+    require_once __DIR__ ."/include/db.php"; 
     include_once __DIR__."/include/partials/header.php";
 
     $students="select * from student";
+    mysqli_set_charset($db,"utf8");
     $result= mysqli_query($db, $students);
     $render = "<div class='container'>";
     $render .= "<a href='./insert.php'>Оюутан нэмэх</a>";
