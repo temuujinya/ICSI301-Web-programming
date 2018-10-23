@@ -1,6 +1,9 @@
 <?php
 global $db;
-$studentID = $_COOKIE["studentID"];
+if(isset($_COOKIE["studentID"]))
+{
+    $studentID = $_COOKIE["studentID"];
+}
 function checkCourseTaken($courseIndex){
     global $db;
     global $studentID;
@@ -24,5 +27,13 @@ function takeCourseByStudent($courses){
         values ('{$studentID}','{$course}')";
         mysqli_query($db,$takeCourse);
     }
-    }
+}
+
+
+function sanitizeString($var){
+    global $db;
+    $var = mysqli_real_escape_string($db, $var);
+    $var =  filter_var($var, FILTER_SANITIZE_STRING,FILTER_SANITIZE_STRIP_HIGH);
+    return $var;
+}
 ?>

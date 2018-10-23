@@ -1,17 +1,17 @@
 <?php
 // include "./conf/db.php";
-require_once __DIR__."/include/db.php";
-require_once __DIR__."/include/config.php";
+require_once __DIR__."/include/init.php";
 include_once __DIR__."/include/partials/header.php";
 $invalidLogin="";
 
 if(isset($_POST["loginID"])){
-    $studentID = $_POST["loginID"];
+    $studentID = sanitizeString($_POST["loginID"]);
     $findStudentById = "select * from student where studentID='{$studentID}'";
     $result = mysqli_query($db,$findStudentById);
     
     if(mysqli_fetch_assoc($result)!==null){
-        $studentPASS = $_POST["loginPass"];
+        $studentPASS = sanitizeString($_POST["loginPass"]);
+
         $passCheck = "select * from student where studentID='{$studentID}' AND password='{$studentPASS}'";
         $result = mysqli_query($db, $passCheck);
         if(mysqli_fetch_assoc($result)!==null){
