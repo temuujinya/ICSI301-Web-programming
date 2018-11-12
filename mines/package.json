@@ -1,0 +1,21 @@
+{
+  "name": "mines",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.11",
+    "node-gyp": "^3.6.2",
+    "rebuild": "^0.1.2",
+    "request": "^2.83.0",
+    "xml2js": "^0.4.19"
+  }
+}

@@ -1,0 +1,46 @@
+<% students %>
+<table border='1'>	
+<tr>
+	<th>Photo</th>
+	<th>SID</th>
+	<th>CardNr</th>
+	<th>LName</th>
+	<th>FName</th>
+	<th>RegistryNr</th>
+	<th>Phones</th>
+	<th>Emails</th>
+	<th>School</th>
+	<th>Pro</th>
+	<th>Curriculum</th>
+	<th>St</th>
+	<th>Alevel</th>
+	<th>Tp</th>
+</tr>
+
+
+<% students.forEach(function(std){ %>
+<tr>	
+	<td><img width='100px' src="
+https://sisi.num.edu.mn/sisi_v4/modules/student/getstpic.ashx?id=<%= std.SID  %>"></td>
+		<td><%= std.SID  %></td>
+		<td><%= std.CARDNR  %></td>
+		<td><%= std.LNAME  %></td>
+		<td><%= std.FNAME  %></td>
+		<td><%= std.REGISTRYNR  %></td>
+		<td><%= std.PHONES %></td>
+		<td><%= std.EMAILS %></td>
+		<td><%= std.SCHOOL %></td>
+		<td><%= std.PRO %></td>
+		<td><%= std.CURRICULUM %></td>
+		<td><%= std.ST %></td>
+		<td><%= std.ALEVEL  %></td>
+		<td><%= std.TP  %></td>
+
+</tr>
+
+<% }); %> 
+
+</table>
+
+
+
