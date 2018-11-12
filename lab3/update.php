@@ -1,6 +1,7 @@
 <?php
+    require __DIR__."/include/init.php";
     include_once __DIR__."/include/partials/header.php";
- 
+    
     if(isset($_POST["save"])){
         //PHP PREPARED STATEMENT(help for escape sql injection)
         $update = mysqli_prepare($db,"update student set studentID=?,lastName=?,firstName=?,gender=?,dob=?,programIndex=?, password=? where studentID=?");
