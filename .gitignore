@@ -1,0 +1,5 @@
+*.exe
+.npm
+.env
+.cache
+node_modules/
