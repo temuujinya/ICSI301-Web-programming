@@ -12,6 +12,9 @@
       <input type="password" class="form-control" required id="password" aria-describedby="password" placeholder="Нууц үг" name="password">
    </div>
    <div class="form-group">
+      <input type="passwordConfirm" class="form-control" required id="passwordConfirm" aria-describedby="passwordConfirm" placeholder="Нууц үг давт" name="passwordConfirm">
+   </div>
+   <div class="form-group">
       <input type="text" class="form-control" required id="lastName" aria-describedby="lastName" placeholder="Овог" name="lName">
    </div>
    <div class="form-group">
