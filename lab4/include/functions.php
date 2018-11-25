@@ -15,8 +15,20 @@ function findAllProgram(){
     return $query;
 }
 
-function checkPasswordsEqual($pass,$passConfirm){
+function checkUserName($username){
     global $pdo;
+    $query = "select * from users where userName = :userName";
+    $query = $pdo->prepare($query);
+    $query->bindParam(':userName', $username);
+    $query->execute();
+    echo $query->rowCount();
+    if($query->rowCount()>0){
+        return false;
+    }else{
+        return true;
+    }
+}
+function checkPasswordsEqual($pass,$passConfirm){
     if(strcmp($pass, $passConfirm)==0){
         return true;
     }else{
