@@ -29,7 +29,6 @@ function takeCourseByStudent($courses){
     }
 }
 
-
 function sanitizeString($var){
     global $db;
     $var = mysqli_real_escape_string($db, $var);
