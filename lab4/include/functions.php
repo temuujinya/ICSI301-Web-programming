@@ -4,6 +4,17 @@ if(isset($_COOKIE["studentID"]))
 {
     $studentID = $_COOKIE["studentID"];
 }
+
+
+function findAllProgram(){
+    global $pdo;
+    $query = "select * from program";
+    $query = $pdo->prepare($query);
+    $query->execute();
+
+    return $query;
+}
+
 function checkCourseTaken($courseIndex){
     global $db;
     global $studentID;

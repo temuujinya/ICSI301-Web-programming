@@ -1,4 +1,6 @@
-<? include_once __DIR__."/../config.php";?>
+<? require_once __DIR__."/../init.php";
+   global $programs;
+?>
 <div class="text-center">
     <img class="justify-content-center mb-5 mt-5" src="<? echo $site_url;?>/public/uploads/img/logo.png" width="60%"  alt="">
 </div>
@@ -45,7 +47,7 @@
    <!-- </div> -->
    <div class="form-group">
       <!--<label for="loginPass">Нууц үг</label>-->
-      <input id="datepicker" width="276" placeholder="Төрсөн огноо" name="dob">
+      <input id="datepicker" name="dob" width="276" placeholder="Төрсөн огноо" name="dob">
    </div>
    <!-- <div class="form-group"> -->
       <!--<label for="loginPass">Нууц үг</label>-->
@@ -57,15 +59,20 @@
    <!-- </div> -->
    <div class="form-group">
       <!--<label for="loginPass">Нууц үг</label>-->
-      <input type="text" class="form-control" id="level" required    placeholder="Оюутны дугаар" name="studentID">
+      <input type="text" class="form-control" id="studentID" required    placeholder="Оюутны дугаар" name="studentID">
    </div>
 
 
     <div class="form-group">
       <select id="programIndex" name="programIndex" class="form-control">
         <option selected>Хөтөлбөр...</option>
-        <option value="0">Програм хангамж</option>
-        <option value="1">Мэдээллийн технологи</option>
+        <?php 
+         $programsHtml="";
+         while($program = $programs->fetch()){
+            $programsHtml.="<option value='".$program["programIndex"]."'>".$program["programName"]."</option>";
+         }
+         echo $programsHtml;
+        ?>
       </select>
     </div>
    <!--

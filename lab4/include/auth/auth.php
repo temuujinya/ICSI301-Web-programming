@@ -1,5 +1,8 @@
-<? include_once __DIR__."/../partials/header.php";
-
+<? 
+require_once __DIR__."/../init.php";
+include_once __DIR__."/../partials/header.php";
+   
+$programs=findAllProgram();
 ?>
 <div class="container">
    <!-- Content here -->
