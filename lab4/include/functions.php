@@ -37,7 +37,6 @@ function checkUserNameStructure($username){
     }
 }
 
-var_dump(checkUserNameStructure("as@da1516"));
 function checkPasswordsEqual($pass,$passConfirm){
     if(strcmp($pass, $passConfirm)==0){
         return true;
