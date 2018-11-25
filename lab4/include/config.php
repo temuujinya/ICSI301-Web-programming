@@ -1,3 +1,3 @@
 <?php
-$site_url="http://localhost/weblab3";
+$site_url="http://localhost/weblab4";
 ?>
