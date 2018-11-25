@@ -28,6 +28,16 @@ function checkUserName($username){
         return true;
     }
 }
+
+function checkUserNameStructure($username){
+    if(preg_match('/^[A-Za-z]{1}[A-Za-z0-9_]{5,31}$/', $username)){
+       return true;
+    }else{
+        return false;
+    }
+}
+
+var_dump(checkUserNameStructure("as@da1516"));
 function checkPasswordsEqual($pass,$passConfirm){
     if(strcmp($pass, $passConfirm)==0){
         return true;
