@@ -10,6 +10,8 @@ require_once __DIR__ ."/../config.php";
   <title>Бяцхан сиси</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<? echo $site_url;?>/public/bootstrap/css/bootstrap.min.css"/>
+  <!-- For datepicker-->
+  <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="<? echo $site_url;?>/public/style/main.css"/>
 </head>
 <body>
