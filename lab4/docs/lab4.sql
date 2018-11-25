@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 25, 2018 at 05:07 AM
+-- Generation Time: Nov 25, 2018 at 12:12 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -60,6 +60,13 @@ CREATE TABLE `courseTakenHistory` (
   `takenDate` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `courseTakenHistory`
+--
+
+INSERT INTO `courseTakenHistory` (`studentID`, `courseIndex`, `takenDate`) VALUES
+('16b1seas3369', 'CSII200', '2018-11-25 16:17:03');
+
 -- --------------------------------------------------------
 
 --
@@ -95,7 +102,7 @@ CREATE TABLE `staff` (
   `firstName` varchar(20) NOT NULL,
   `lastName` varchar(20) NOT NULL,
   `dateJoined` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `staff`
@@ -115,6 +122,7 @@ INSERT INTO `staff` (`staffID`, `userName`, `position`, `firstName`, `lastName`,
 
 CREATE TABLE `student` (
   `studentID` varchar(15) NOT NULL,
+  `userName` varchar(32) NOT NULL,
   `lastName` varchar(20) NOT NULL,
   `firstName` varchar(20) NOT NULL,
   `gender` enum('m','f') NOT NULL,
@@ -127,13 +135,13 @@ CREATE TABLE `student` (
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`studentID`, `lastName`, `firstName`, `gender`, `dob`, `programIndex`, `password`) VALUES
-('14b1seas0072', 'Rentsendorj', 'Javkhlan', 'm', '1996-05-06', 'D061303', '123456'),
-('15b1seas3370', 'Steve', 'Jobs', 'm', '1997-08-02', 'D061302', '123456'),
-('15b1seas3371', 'Bill', 'Gates', 'm', '1997-02-03', 'D061301', '123456'),
-('16b1seas3369', 'Temuujin', 'Ya', 'm', '1998-01-01', 'D061302', '123456'),
-('16b1seas3372', 'Uzumaki', 'Naruto', 'm', '1998-08-05', 'D061304', '123456'),
-('16b1seas3373', 'San', 'Sakura', 'f', '1998-05-06', 'D061303', '123456');
+INSERT INTO `student` (`studentID`, `userName`, `lastName`, `firstName`, `gender`, `dob`, `programIndex`, `password`) VALUES
+('14b1seas0072', 'javkhlan', 'Rentsendorj', 'Javkhlan', 'm', '1996-05-06', 'D061303', '123456'),
+('15b1seas3370', 'jobs', 'Steve', 'Jobs', 'm', '1997-08-02', 'D061302', '123456'),
+('15b1seas3371', 'gates', 'Bill', 'Gates', 'm', '1997-02-03', 'D061301', '123456'),
+('16b1seas3369', 'temuujinya', 'Temuujin', 'Ya', 'm', '1998-01-01', 'D061302', '123456'),
+('16b1seas3372', 'naruto', 'Uzumaki', 'Naruto', 'm', '1998-08-05', 'D061304', '123456'),
+('16b1seas3373', 'sakura', 'San', 'Sakura', 'f', '1998-05-06', 'D061303', '123456');
 
 -- --------------------------------------------------------
 
@@ -149,7 +157,7 @@ CREATE TABLE `users` (
   `userType` tinyint(4) NOT NULL DEFAULT '0',
   `changePass` tinyint(4) NOT NULL DEFAULT '0',
   `isBlocked` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -199,7 +207,7 @@ ALTER TABLE `program`
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`staffID`),
   ADD UNIQUE KEY `staffID` (`staffID`),
-  ADD UNIQUE KEY `userName` (`userName`);
+  ADD KEY `fk_staff_username` (`userName`);
 
 --
 -- Indexes for table `student`
@@ -207,6 +215,7 @@ ALTER TABLE `staff`
 ALTER TABLE `student`
   ADD PRIMARY KEY (`studentID`),
   ADD UNIQUE KEY `studentID` (`studentID`),
+  ADD UNIQUE KEY `userName` (`userName`),
   ADD KEY `FK_StudentProgramIndex` (`programIndex`);
 
 --
@@ -231,13 +240,14 @@ ALTER TABLE `courseTakenHistory`
 -- Constraints for table `staff`
 --
 ALTER TABLE `staff`
-  ADD CONSTRAINT `FK_userName` FOREIGN KEY (`userName`) REFERENCES `users` (`userName`);
+  ADD CONSTRAINT `fk_staff_username` FOREIGN KEY (`userName`) REFERENCES `users` (`userName`);
 
 --
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `FK_StudentProgramIndex` FOREIGN KEY (`programIndex`) REFERENCES `program` (`programIndex`);
+  ADD CONSTRAINT `FK_StudentProgramIndex` FOREIGN KEY (`programIndex`) REFERENCES `program` (`programIndex`),
+  ADD CONSTRAINT `fk_student_username` FOREIGN KEY (`userName`) REFERENCES `users` (`userName`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
