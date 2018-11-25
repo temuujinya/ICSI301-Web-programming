@@ -28,7 +28,39 @@ function checkUserName($username){
         return true;
     }
 }
-
+/*
+4- маш сайн
+3- дунд
+2-сул
+1- маш муу
+0- богино байна
+-1 - хэтэрхий урт байна
+NULL - зөвшөөрөгдөхгүй тэмдэгт
+*/
+function checkPasswordStructure($password){
+    if(preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/', $password)){
+        return 4;
+     }else if(preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/', $password)
+                || preg_match('/^(?=.*\d)(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/', $password)
+                || preg_match('/^(?=.*[@#\-_$%^&+=§!\?])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/', $password)){
+         return 3;
+     }else if(preg_match('/^(?=.*\d)[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/', $password)
+                || preg_match('/^(?=.*[@#\-_$%^&+=§!\?])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/', $password)
+                || preg_match('/^(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/', $password)){
+                return 2;              
+                // }
+                // else if(preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/',$password)){
+                //     return 1;
+                }else if(preg_match('/^[0-9A-Za-z@#\-_$%^&+=§!\?]{6,32}$/', $password)){
+                    // echo "length";
+                    return 1;
+                }elseif(strlen($password)<6){
+                    return 0;
+                }elseif(strlen($password)>32){
+                    return -1;
+                }
+ }
+ 
 function checkUserNameStructure($username){
     if(preg_match('/^[A-Za-z]{1}[A-Za-z0-9_]{5,31}$/', $username)){
        return true;
