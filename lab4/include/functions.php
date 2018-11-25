@@ -15,6 +15,15 @@ function findAllProgram(){
     return $query;
 }
 
+function checkPasswordsEqual($pass,$passConfirm){
+    global $pdo;
+    if(strcmp($pass, $passConfirm)==0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function checkCourseTaken($courseIndex){
     global $db;
     global $studentID;
