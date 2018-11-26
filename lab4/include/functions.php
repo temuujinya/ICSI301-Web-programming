@@ -5,6 +5,60 @@ if(isset($_COOKIE["studentID"]))
     $studentID = $_COOKIE["studentID"];
 }
 
+function hashmin($pass){
+    $saltA = "$%28Temuujinkka";
+    $saltB = "Bna$%^&hha_?";
+    $hashed = hash('ripemd128',$saltA.$pass.$saltB);
+    return $hashed;
+}
+
+function addNewUser($username, $password, $usertype){
+    global $pdo;
+    $query = "insert into users(userName, password, userType) 
+                values(:userName,:passWord,:userType)";
+    $query = $pdo->prepare($query);
+    $password=hashmin($password);
+    $query->bindParam(':userName',$username);
+    $query->bindParam(':passWord',$password);
+    $query->bindParam(':userType',$usertype);
+    $query->execute();
+}
+
+function addNewStaff($username, $password, $lName, $fName, $staffID, $staffPosision, $staffJoinDate, $userType){
+    global $pdo;
+    addNewUser($username, $password, $userType);
+    $query = "insert into staff
+        (username, staffID, position, firstName, lastName, dateJoined)
+        values(:username, :staffid, :position, :fname, :lname, :datejoined)";
+    $query=$pdo->prepare($query);
+    $query->bindParam(':username',$username);
+    $query->bindParam(':staffid',$staffID);
+    $query->bindParam(':position',$staffPosision);
+    $query->bindParam(':fname',$fName);
+    $query->bindParam(':lname',$lName);
+    $query->bindParam(':datejoined',$staffJoinDate);
+    $query->execute();
+}
+
+function addNewStudent($username, $password, $lName, $fName, $studentID, $gender, $dob, $userType, $programIndex){
+    global $pdo;
+    addNewUser($username, $password, $userType);
+    $query = "insert into student
+        (username, studentID, firstName, lastName, gender,
+        programIndex, dob)
+        values(:username, :studentid, :fname, :lname, :gender,
+        :programIndex, :dob)";
+    $query=$pdo->prepare($query);
+    $query->bindParam(':username',$username);
+    $query->bindParam(':studentid',$studentID);
+    $query->bindParam(':fname',$fName);
+    $query->bindParam(':lname',$lName);
+    $query->bindParam(':gender',$gender);
+    $query->bindParam(':programIndex',$programIndex);
+    $query->bindParam(':dob',$dob);
+    $query->execute();
+}
+
 
 function findAllProgram(){
     global $pdo;
@@ -62,7 +116,7 @@ function checkPasswordStructure($password){
  }
  
 function checkUserNameStructure($username){
-    if(preg_match('/^[A-Za-z]{1}[A-Za-z0-9_]{5,31}$/', $username)){
+    if(preg_match('/^[A-Za-z]{1}[A-Za-z0-9_]{5,32}$/', $username)){
        return true;
     }else{
         return false;
@@ -71,6 +125,7 @@ function checkUserNameStructure($username){
 
 function checkPasswordsEqual($pass,$passConfirm){
     if(strcmp($pass, $passConfirm)==0){
+        // var_dump($query);
         return true;
     }else{
         return false;

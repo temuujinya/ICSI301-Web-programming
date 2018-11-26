@@ -3,6 +3,8 @@ require_once __DIR__."/../init.php";
 include_once __DIR__."/../partials/header.php";
    
 $programs=findAllProgram();
+$useDifferentPassword=false;
+
 ?>
 <div class="container">
    <!-- Content here -->
