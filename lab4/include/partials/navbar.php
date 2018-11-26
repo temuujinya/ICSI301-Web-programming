@@ -11,8 +11,16 @@
         <a class="nav-link" href="./">Нүүр хуудас <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="list.php">Оюутан жагсаалт</a>
+        <a class="nav-link" href="./courses.php">Хичээлүүд</a>
       </li>
+      <? if(isAdmin($_SESSION["username"])){ ?>
+      <li class="nav-item">
+        <a class="nav-link" href="./users.php">Хэрэглэгчид</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./list.php">Оюутан жагсаалт</a>
+      </li>
+      <? } ?>
       <li class="nav-item">
         <a class="nav-link disabled" href="log_out.php">Гарах</a>
       </li>

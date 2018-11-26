@@ -1,38 +1,63 @@
 <?php
 // include "./conf/db.php";
 require_once __DIR__."/include/init.php";
-include_once __DIR__."/include/partials/header.php";
 $invalidLogin="";
 $errorStatus=false;
 
-if(isset($_POST["loginID"])){
-    $studentID = sanitizeString($_POST["loginID"]);
-    $findStudentById = "select * from student where studentID='{$studentID}'";
-    $result = mysqli_query($db,$findStudentById);
-    
-    if(mysqli_fetch_assoc($result)!==null){
-        $studentPASS = sanitizeString($_POST["loginPass"]);
-
-        $passCheck = "select * from student where studentID='{$studentID}' AND password='{$studentPASS}'";
-        $result = mysqli_query($db, $passCheck);
-        if(mysqli_fetch_assoc($result)!==null){
-            echo "logged in";
-            setcookie("studentID",$studentID);
-            header("location: {$site_url}/");
-        }else{
-            echo "passwrong";
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signin"])){
+    $studentID =$_POST["loginID"];
+    $studentPASS =$_POST["loginPass"];
+    if(loginCheck($studentID, $studentPASS)===true){
+        if(isset($_POST["remember"])){
+            setcookie("username",$studentID,time() + (86400 * 365));
         }
+    }elseif(loginCheck($studentID, $studentPASS)===-1){
+        $invalidLogin ="<div class='alert alert-danger' role='alert'>
+                            Ийм нэвтрэх нэртэй хэрэглэгч алга байна.
+                        </div>";
+        
+    }elseif(loginCheck($studentID, $studentPASS)===-2){
+        $invalidLogin ="<div class='alert alert-danger' role='alert'>
+                            Системийн админ таныг блоклосон байна мөнгөө
+                            төл .
+                        </div>";
     }else{
         $invalidLogin ="<div class='alert alert-danger' role='alert'>
                             Оюутны хувийн дугаар эсвэл нууц үг буруу байна.
                         </div>";
     }
+
+    // $findStudentById = "select * from student where studentID='{$studentID}'";
+    // $result = mysqli_query($db,$findStudentById);
+    
+    // if(mysqli_fetch_assoc($result)!==null){
+    //     $studentPASS = sanitizeString($_POST["loginPass"]);
+
+    //     $passCheck = "select * from student where studentID='{$studentID}' AND password='{$studentPASS}'";
+    //     $result = mysqli_query($db, $passCheck);
+    //     if(mysqli_fetch_assoc($result)!==null){
+    //         echo "logged in";
+    //         setcookie("studentID",$studentID);
+    //         header("location: {$site_url}/");
+    //     }else{
+    //         echo "passwrong";
+    //     }
+    // }else{
+    //     $invalidLogin ="<div class='alert alert-danger' role='alert'>
+    //                         Оюутны хувийн дугаар эсвэл нууц үг буруу байна.
+    //                     </div>";
+    // }
 }
 
 $userNameErr = $passwordErr =$passwordConfirmErr = $firstNameErr = $lastNameErr = $genderErr = $dobErr = $studentIdErr = $programErr= $userTypeErr =$staffID=$staffPosition=$staffJoinDate= "";
 $userName=$password=$passwordConfirm=$firstName=$lastName=$gender=$dob=$studentID=$programIndex=$userType=$staffIdErr=$staffPositionErr=$staffJoinDateErr="";
 
-if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["signup"] || $_POST["finishSignUpStaff"]){
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signup"]) || isset($_POST["finishSignUpStaff"])|| isset( $_POST["changePass"]) || isset($_POST["finishSignUpStudent"])){
+    
+    $passHide=true;
+   if(isset( $_POST["finishSignUpStaff"]) ||isset( $_POST["finishSignUpStudent"])|| isset( $_POST["changePass"])){
+    $passHide=false;
+   }
    $passwordStatus=0;
    $userName = $_POST["userName"];
    $userType = $_POST["userType"];
@@ -41,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["signup"] || $_POST["finishSig
    $lastName = $_POST["lName"];
    $firstName = $_POST["fName"];
 
-if($userType==2){
+if($userType=='2'){
     $gender = $_POST["gender"];
      $dob = $_POST["dob"];
     if(isset($_POST["studentID"])){
@@ -128,8 +153,7 @@ if($userType=='1'){
 
 
 
-    if($userType==1){
-        var_dump($staffID."hha");
+    if($userType=='1'){
         if(empty($staffID)){
             $staffIdErr = "<div class='alert alert-danger' role='alert'>
                             Ажилтны дугаараа оруулна уу!
@@ -153,7 +177,7 @@ if($userType=='1'){
         
     }
 
-    if($userType==2){
+    if($userType=='2'){
 
     if(empty($gender)){
         $genderErr = "<div class='alert alert-danger' role='alert'>
@@ -209,15 +233,34 @@ if($userType=='1'){
         }
     }
 
-    if($_POST["finishSignUpStaff"]){
-        addNewStaff($userName, $password, $lastName, $firstName, $staffID, $staffPosition, $staffJoinDate, $userType);
+    if(!isset($_POST["finishSignUpStaff"])&& !isset($_POST["finishSignUpStudent"]) && isset($_GET["t"])){
+        if($_GET['t']=='student'){
+            addNewStudent($userName, $password, $lastName, $firstName, $studentID,$gender,$dob,$userType,$programIndex);
+            header("location: ./");
+        }elseif($_GET['t']=='staff'){
+            addNewStaff($userName, $password, $lastName, $firstName, $staffID, $staffPosition, $staffJoinDate, $userType);
+            header("location: ./");
+        }
     }
+    if(isset($_POST["finishSignUpStaff"])){
+        addNewStaff($userName, $password, $lastName, $firstName, $staffID, $staffPosition, $staffJoinDate, $userType);
+        header("location: ./");
+    }
+    if(isset($_POST["finishSignUpStudent"])){
+        addNewStudent($userName, $password, $lastName, $firstName, $studentID,$gender,$dob,$userType,$programIndex);
+        header("location: ./");
+    }
+    // if(isset($_POST["changePass"])){
+    //     $passHide=false;
+    // }
 
 }
 
-if(!isset($_COOKIE['studentID'])){
+if(!isset($_SESSION['username'])){
     require_once "include/auth/auth.php";
-}else{
+}elseif(isAdmin($_SESSION['username'])){
+    require_once "list.php";
+}else {
     require_once "courses.php";
 }
 mysqli_close($db);

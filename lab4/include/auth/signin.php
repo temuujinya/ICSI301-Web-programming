@@ -6,11 +6,14 @@ require_once __DIR__."/../config.php";
 </div>
  <?
  echo $invalidLogin;
+ if(isset($_GET['msg'])){
+    echo "<div class='alert alert-success' role='alert'>".$_GET['msg']."</div>";
+ }
  ?>
 <form action="<?echo $site_url;?>/" method="POST">
    <div class="form-group">
       <!--<label for="loginEmail">Цахим шуудан</label>-->
-      <input type="text" class="form-control" id="loginEmail" placeholder="Цахим хаяг/Хэрэглэгчийн нэр"/ name="loginID" required>
+      <input type="text" value="<? echo (isset($_COOKIE["username"]) ? $_COOKIE["username"]:"")?>" class="form-control" id="loginEmail" placeholder="Цахим хаяг/Хэрэглэгчийн нэр" name="loginID" required>
       <!--
          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
          -->
@@ -27,7 +30,9 @@ require_once __DIR__."/../config.php";
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div>
       -->
-   <button type="submit " class="btn btn-primary">Нэвтрэх</button>
+
+   <input type="checkbox" name="remember" value="1">Remember<br/>
+   <input type="submit" class="btn btn-primary" name="signin" value="Нэвтрэх">
    <br/>
    <a href="">Нууц үг мартсан</a>
 </form>

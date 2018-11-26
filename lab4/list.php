@@ -1,9 +1,12 @@
 <?php
-
-if(isset($_COOKIE['studentID'])){
-
-    require_once __DIR__ ."/include/db.php"; 
+    require_once __DIR__ ."/include/init.php"; 
+    if(!isAuthenticate()){
+        echo "Nevter dahiad mangasaa";
+        die();
+    }
     include_once __DIR__."/include/partials/header.php";
+    include_once __DIR__."/include/partials/navbar.php";
+if(isAdmin($_SESSION['username'])){
 
     $students="select * from student";
     mysqli_set_charset($db,"utf8");
@@ -13,6 +16,7 @@ if(isset($_COOKIE['studentID'])){
     $render .= "<table class='table table-hover'>
         <thead>
             <tr>
+                <th scope='col'>Хэрэглэгчийн нэр</th>
                 <th scope='col'>Хувийн дугаар</th>
                 <th scope='col'>Овог</th>
                 <th scope='col'>Нэр</th>
@@ -26,6 +30,7 @@ if(isset($_COOKIE['studentID'])){
     while($student = mysqli_fetch_assoc($result)){
         $tempStudent = $student;
         $render.= "<tr>
+                <td>{$tempStudent["userName"]}</td>
                 <td>{$tempStudent["studentID"]}</td>
                 <td>{$tempStudent["lastName"]}</td>
                 <td>{$tempStudent["firstName"]}</td>

@@ -1,9 +1,6 @@
 <?php
 global $db;
-if(isset($_COOKIE["studentID"]))
-{
-    $studentID = $_COOKIE["studentID"];
-}
+
 
 function hashmin($pass){
     $saltA = "$%28Temuujinkka";
@@ -12,6 +9,161 @@ function hashmin($pass){
     return $hashed;
 }
 
+function loginCheckUsername($username){
+    global $pdo;
+    $query = "select * from users where userName=:username";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":username",$username);
+    $query->execute();
+    if($query->rowCount()>0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function loginCheckPassword($username, $password){
+    global $pdo;
+    $query = "select * from users where userName=:username and password=:password";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":username",$username);
+    $query->bindParam(":password",$password);
+    $password=hashmin($password);
+    $query->execute();
+    if($query->rowCount()>0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function findStudentID($username){
+    global $pdo;
+    $query = "select * from student where userName=:username";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":username",$username);
+    $query->execute();
+    $query=$query->fetch();
+    return $query["studentID"];
+}
+/* 
+1-staff
+2-student
+*/
+function findUserType($username){
+    global $pdo;
+    $query = "select * from users where userName=:username";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":username",$username);
+    $query->execute();
+    $query=$query->fetch();
+    return $query["userType"];
+}
+
+/* 
+1-admin
+0-student
+*/
+function findUserRole($username){
+    global $pdo;
+    $query = "select * from users where userName=:username";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":username",$username);
+    $query->execute();
+    $query=$query->fetch();
+    return $query["role"];
+}
+
+function isAdmin($username){
+    if(findUserRole($username)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function isAuthenticate(){
+    if(isset($_SESSION['username'])&&isset($_SESSION['userType'])){
+        return true;
+    }else{
+        return false;
+    }
+}
+/*
+0-no
+1-yes 
+*/
+function isBlocked($username){
+    global $pdo;
+    $query = "select * from users where userName=:username";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":username",$username);
+    $query->execute();
+    $query=$query->fetch();
+    return $query["isBlocked"];
+}
+
+/*
+0-no
+1-yes 
+*/
+function isNeedChangePass($username){
+    global $pdo;
+    $query = "select * from users where userName=:username";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":username",$username);
+    $query->execute();
+    $query=$query->fetch();
+    return $query["changePass"];
+}
+
+/*
+-1 - username not found
+-2 - user blocked
+*/
+function loginCheck($username, $password){
+    if(loginCheckUsername($username)){
+        if(loginCheckPassword($username,$password)){
+            if(!isBlocked($username)){
+                $_SESSION['username']=$username;
+                $_SESSION['userType']=findUserType($username);
+                $_SESSION['isBlocked']=isBlocked($username);
+                $_SESSION['needChangePass']=isNeedChangePass($username);
+                if(findUserType($username)===1){
+                    $_SESSION['userRole']=isAdmin($username);
+                }else{
+                    $_SESSION['studentID']=findStudentID($username);
+                    
+                }
+                return true;
+            }else{
+                return -2;
+            }
+            // $_SESSION['']
+        }
+    }else{
+        return -1;
+    }
+}
+function updateUserChangePass($username,$changePass){
+    global $pdo;
+    $query = "update table users SET changePass=:changepass where 
+                userName = :username";
+    $query=$pdo->prepare($query);
+    $query->bindParam(":username", $username);
+    $query->bindParam(":changepass",$changePass);
+    $query->execute();
+}
+
+function updateUserIsBlocked($username,$isblocked){
+    global $pdo;
+    $query = "update table users SET isBlocked=:isblocked where 
+                userName = :username";
+    $query=$pdo->prepare($query);
+    $query->bindParam(":username", $username);
+    $query->bindParam(":isblocked",$isblocked);
+    $query->execute();
+}
 function addNewUser($username, $password, $usertype){
     global $pdo;
     $query = "insert into users(userName, password, userType) 
@@ -69,13 +221,20 @@ function findAllProgram(){
     return $query;
 }
 
+function findAllUsers(){
+    global $pdo;
+    $query = "select * from users";
+    $query = $pdo->prepare($query);
+    $query->execute();
+    return $query;
+}
+
 function checkUserName($username){
     global $pdo;
     $query = "select * from users where userName = :userName";
     $query = $pdo->prepare($query);
     $query->bindParam(':userName', $username);
     $query->execute();
-    echo $query->rowCount();
     if($query->rowCount()>0){
         return false;
     }else{
@@ -132,9 +291,10 @@ function checkPasswordsEqual($pass,$passConfirm){
     }
 }
 
+
 function checkCourseTaken($courseIndex){
     global $db;
-    global $studentID;
+    $studentID=findStudentID($_SESSION["username"]);;
     $checkQR="select * from courseTakenHistory where 
         studentID ='{$studentID}' AND courseIndex='{$courseIndex}'";
     $checkQR = mysqli_query($db,$checkQR);
@@ -149,7 +309,7 @@ function checkCourseTaken($courseIndex){
 
 function takeCourseByStudent($courses){
     global $db;
-    global $studentID;
+    $studentID=findStudentID($_SESSION["username"]);
     foreach($courses as $course){
         $takeCourse = "insert into courseTakenHistory (studentID,courseIndex)
         values ('{$studentID}','{$course}')";

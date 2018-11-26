@@ -1,7 +1,12 @@
 <?php
-if(isset($_COOKIE['studentID'])){
-    include_once __DIR__."/include/partials/header.php";
-    require __DIR__."/include/init.php";
+require __DIR__."/include/init.php";
+if(!isAuthenticate()){
+    echo "Nevter dahiad mangasaa";
+    die();
+}
+include_once __DIR__."/include/partials/header.php";
+include_once __DIR__."/include/partials/navbar.php";
+if(isAdmin($_SESSION['username'])){
     if(isset($_POST['insert'])){
         $insert = mysqli_prepare($db,"insert into student (studentID, lastName, firstName, gender,
                         dob, programIndex,password) values (?,?,?,?,?,?,?)");

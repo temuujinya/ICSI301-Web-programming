@@ -1,12 +1,16 @@
 <?
 
-if(isset($_COOKIE['studentID'])){
-    require_once __DIR__."/include/init.php";
+require_once __DIR__."/include/init.php";
+if(!isAuthenticate()){
+    echo "Nevter dahiad mangasaa";
+    die();
+}
+if(1==1){
     include_once __DIR__."/include/partials/header.php";
+    include_once __DIR__."/include/partials/navbar.php";
     $getAllCourse = "select * from course";
     mysqli_set_charset($db,"utf8");    
     $result= mysqli_query($db,$getAllCourse);
-
     $render = "<div class='container bg-light'>
         <form acion='#' method='post'>
         <table class='table table-hover'>
@@ -26,7 +30,7 @@ if(isset($_COOKIE['studentID'])){
     
         while($course = mysqli_fetch_assoc($result)){
             $render .= "<tr ";
-            if(checkCourseTaken($course['courseIndex'],$_COOKIE['studentID'])){ 
+            if(checkCourseTaken($course['courseIndex'],$_SESSION['studentID'])){ 
                 $render .= "class='bg-success text-light'";
             }
             $render .="><th scope='row'>{$course['courseIndex']}</th>
@@ -35,7 +39,7 @@ if(isset($_COOKIE['studentID'])){
                     <td><input type='checkbox' value='{$course['courseIndex']}' name='selectCourse[]' 
                     ";
                     
-            if(checkCourseTaken($course['courseIndex'],$_COOKIE['studentID'])){ 
+            if(checkCourseTaken($course['courseIndex'],$_SESSION['studentID'])){ 
                 $render .= "checked disabled";
             }
             $render .="/></td>
