@@ -9,7 +9,8 @@
 <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
 <script>
    $('#datepicker').datepicker({
-       uiLibrary: 'bootstrap4'
+       uiLibrary: 'bootstrap4',
+       format: 'yyyy-dd-mm'
    });
    jQuery(document).ready(function($){
    // Allow Page URL to activate a tab's ID
