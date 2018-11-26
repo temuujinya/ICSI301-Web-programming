@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 25, 2018 at 12:12 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- Host: 127.0.0.1
+-- Generation Time: Nov 26, 2018 at 01:00 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -51,21 +51,23 @@ INSERT INTO `course` (`courseIndex`, `courseName`, `courseCredit`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `courseTakenHistory`
+-- Table structure for table `coursetakenhistory`
 --
 
-CREATE TABLE `courseTakenHistory` (
+CREATE TABLE `coursetakenhistory` (
   `studentID` varchar(15) NOT NULL,
   `courseIndex` varchar(8) NOT NULL,
   `takenDate` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `courseTakenHistory`
+-- Dumping data for table `coursetakenhistory`
 --
 
-INSERT INTO `courseTakenHistory` (`studentID`, `courseIndex`, `takenDate`) VALUES
-('16b1seas3369', 'CSII200', '2018-11-25 16:17:03');
+INSERT INTO `coursetakenhistory` (`studentID`, `courseIndex`, `takenDate`) VALUES
+('16b1seas3369', 'CSII200', '2018-11-25 16:17:03'),
+('16b1seas3369', 'ICSI202', '2018-11-26 18:28:35'),
+('16b1seas3373', 'CSII200', '2018-11-26 18:55:31');
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,7 @@ CREATE TABLE `staff` (
   `position` varchar(25) NOT NULL,
   `firstName` varchar(20) NOT NULL,
   `lastName` varchar(20) NOT NULL,
-  `dateJoined` date NOT NULL
+  `dateJoined` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -109,10 +111,10 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`staffID`, `userName`, `position`, `firstName`, `lastName`, `dateJoined`) VALUES
-('E100110000001', 'temuujin', 'HOD', 'Temuujin', 'Ya', '2008-08-16'),
-('E100120000001', 'emuujin', 'Manager', 'Emuujin', 'Kh', '2009-08-16'),
-('E100130000001', 'bold', 'Supervisor', 'Bold', 'CH', '2009-09-16'),
-('E100140000001', 'jinjoo', 'Staff', 'Jinjoo', 'languu', '2009-08-16');
+('E100110000001', 'temuujin', 'HOD', 'Temuujin', 'Ya', '2008-08-16 00:00:00'),
+('E100120000001', 'emuujin', 'Manager', 'Emuujin', 'Kh', '2009-08-16 00:00:00'),
+('E100130000001', 'bold', 'Supervisor', 'Bold', 'CH', '2009-09-16 00:00:00'),
+('E100140000001', 'jinjoo', 'Staff', 'Jinjoo', 'languu', '2009-08-16 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -127,21 +129,20 @@ CREATE TABLE `student` (
   `firstName` varchar(20) NOT NULL,
   `gender` enum('m','f') NOT NULL,
   `dob` date NOT NULL,
-  `programIndex` varchar(8) NOT NULL,
-  `password` varchar(32) NOT NULL
+  `programIndex` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`studentID`, `userName`, `lastName`, `firstName`, `gender`, `dob`, `programIndex`, `password`) VALUES
-('14b1seas0072', 'javkhlan', 'Rentsendorj', 'Javkhlan', 'm', '1996-05-06', 'D061303', '123456'),
-('15b1seas3370', 'jobs', 'Steve', 'Jobs', 'm', '1997-08-02', 'D061302', '123456'),
-('15b1seas3371', 'gates', 'Bill', 'Gates', 'm', '1997-02-03', 'D061301', '123456'),
-('16b1seas3369', 'temuujinya', 'Temuujin', 'Ya', 'm', '1998-01-01', 'D061302', '123456'),
-('16b1seas3372', 'naruto', 'Uzumaki', 'Naruto', 'm', '1998-08-05', 'D061304', '123456'),
-('16b1seas3373', 'sakura', 'San', 'Sakura', 'f', '1998-05-06', 'D061303', '123456');
+INSERT INTO `student` (`studentID`, `userName`, `lastName`, `firstName`, `gender`, `dob`, `programIndex`) VALUES
+('14b1seas0072', 'javkhlan', 'Rentsendorj', 'Javkhlan', 'm', '1996-05-06', 'D061303'),
+('15b1seas3370', 'jobs', 'Steve', 'Jobs', 'm', '1997-08-02', 'D061302'),
+('15b1seas3371', 'gates', 'Bill', 'Gates', 'm', '1997-02-03', 'D061301'),
+('16b1seas3369', 'temuujinya', 'Temuujin', 'Ya', 'm', '1998-01-01', 'D061302'),
+('16b1seas3372', 'naruto', 'Uzumaki', 'Naruto', 'm', '1998-08-05', 'D061304'),
+('16b1seas3373', 'sakura', 'San', 'Sakura', 'f', '1998-05-06', 'D061303');
 
 -- --------------------------------------------------------
 
@@ -154,7 +155,7 @@ CREATE TABLE `users` (
   `password` varchar(32) NOT NULL,
   `regDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `role` tinyint(4) NOT NULL DEFAULT '0',
-  `userType` tinyint(4) NOT NULL DEFAULT '0',
+  `userType` tinyint(4) NOT NULL DEFAULT '2',
   `changePass` tinyint(4) NOT NULL DEFAULT '0',
   `isBlocked` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -164,16 +165,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userName`, `password`, `regDate`, `role`, `userType`, `changePass`, `isBlocked`) VALUES
-('bold', '123456', '2018-10-07 16:00:00', 1, 1, 0, 0),
-('emuujin', '123456', '2018-09-08 16:00:00', 1, 1, 0, 0),
-('gates', '123456', '2019-10-07 16:00:00', 0, 0, 0, 0),
-('javkhlan', '123456', '2019-10-07 16:00:00', 0, 0, 0, 0),
-('jinjoo', '123456', '2018-10-07 16:00:00', 1, 1, 0, 0),
-('jobs', '123456', '2019-10-07 16:00:00', 0, 0, 0, 0),
-('naruto', '123456', '2019-10-07 16:00:00', 0, 0, 0, 0),
-('sakura', '123456', '2019-10-07 16:00:00', 0, 0, 0, 0),
-('temuujin', '123456', '2018-09-07 16:00:00', 1, 1, 0, 0),
-('temuujinya', '123456', '2019-10-07 16:00:00', 0, 0, 0, 0);
+('bold', 'd6a0c0253f3e544744013711c52f4ca2', '2018-10-07 16:00:00', 1, 1, 0, 0),
+('emuujin', 'd6a0c0253f3e544744013711c52f4ca2', '2018-09-08 16:00:00', 1, 1, 0, 0),
+('gates', 'd6a0c0253f3e544744013711c52f4ca2', '2019-10-07 16:00:00', 0, 2, 0, 0),
+('javkhlan', 'd6a0c0253f3e544744013711c52f4ca2', '2019-10-07 16:00:00', 0, 2, 0, 0),
+('jinjoo', 'd6a0c0253f3e544744013711c52f4ca2', '2018-10-07 16:00:00', 1, 1, 0, 0),
+('jobs', 'd6a0c0253f3e544744013711c52f4ca2', '2019-10-07 16:00:00', 0, 2, 0, 1),
+('naruto', 'd6a0c0253f3e544744013711c52f4ca2', '2019-10-07 16:00:00', 0, 2, 0, 0),
+('sakura', 'd6a0c0253f3e544744013711c52f4ca2', '2019-10-07 16:00:00', 0, 2, 0, 0),
+('temuujin', 'd6a0c0253f3e544744013711c52f4ca2', '2018-09-07 16:00:00', 1, 1, 0, 0),
+('temuujinya', 'd6a0c0253f3e544744013711c52f4ca2', '2019-10-07 16:00:00', 0, 2, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -187,9 +188,9 @@ ALTER TABLE `course`
   ADD UNIQUE KEY `courseIndex` (`courseIndex`);
 
 --
--- Indexes for table `courseTakenHistory`
+-- Indexes for table `coursetakenhistory`
 --
-ALTER TABLE `courseTakenHistory`
+ALTER TABLE `coursetakenhistory`
   ADD PRIMARY KEY (`studentID`,`courseIndex`),
   ADD KEY `FK_courseTakenHistoryStudentID` (`studentID`),
   ADD KEY `FK_courseTakenHistoryCourseIndex` (`courseIndex`);
@@ -230,9 +231,9 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `courseTakenHistory`
+-- Constraints for table `coursetakenhistory`
 --
-ALTER TABLE `courseTakenHistory`
+ALTER TABLE `coursetakenhistory`
   ADD CONSTRAINT `FK_courseTakenHistoryCourseIndex` FOREIGN KEY (`courseIndex`) REFERENCES `course` (`courseIndex`),
   ADD CONSTRAINT `FK_courseTakenHistoryStudentID` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`);
 
