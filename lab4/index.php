@@ -54,9 +54,9 @@ $userName=$password=$passwordConfirm=$firstName=$lastName=$gender=$dob=$studentI
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signup"]) || isset($_POST["finishSignUpStaff"])|| isset( $_POST["changePass"]) || isset($_POST["finishSignUpStudent"])){
     
-    $passHide=true;
-   if(isset( $_POST["finishSignUpStaff"]) ||isset( $_POST["finishSignUpStudent"])|| isset( $_POST["changePass"])){
     $passHide=false;
+   if(isset( $_POST["finishSignUpStaff"]) ||isset( $_POST["finishSignUpStudent"])|| isset( $_POST["changePass"])){
+    $passHide=true;
    }
    $passwordStatus=0;
    $userName = $_POST["userName"];
@@ -258,9 +258,12 @@ if($userType=='1'){
 
 if(!isset($_SESSION['username'])){
     require_once "include/auth/auth.php";
-}elseif(isAdmin($_SESSION['username'])){
+}elseif(isAdmin($_SESSION['username']) && !isNeedChangePass($_SESSION['username'])){
     require_once "list.php";
-}else {
+}elseif(isNeedChangePass($_SESSION['username'])) {
+    
+    require_once "include/changepass.php";
+}else{
     require_once "courses.php";
 }
 mysqli_close($db);

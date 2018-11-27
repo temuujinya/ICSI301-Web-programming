@@ -1,14 +1,15 @@
 <? 
    global $programs;
 // if(!$hideGeneralReg){
-   ?>
+    $pageHide = false;
+    ?>
 
 
-<form action="<? echo $site_url;?>/index.php?t=student#signup" method="POST">
+<form action="<? echo $site_url;?>/index.php#signup" method="POST">
 
  <? 
  if(isset($passwordStatus)){
-  if(!$errorStatus && $passwordStatus<4 && $passHide){?>
+  if(!$errorStatus && $passwordStatus<4 && !$passHide){?>
     <div class="text-center">
     <h4>Таны нууц үг <? global $passwordErr; echo $passwordErr;?> байна үргэлжлүүлэх үү</h4>
       <input type="submit" name="finishSignUpStudent" class="btn btn-primary" value="Тийм">
@@ -21,12 +22,13 @@
    <div class="form-group" style="<? echo ($userType!="" && $errorStatus==false ? "display:none;":"")?>" >
       <input type="text" class="form-control"  id="username" aria-describedby="userName" value='<? echo $userName; ?>' placeholder="Хэрэглэгчийн нэр" name="userName">
       <? echo $userNameErr; ?>
+      <input type='hidden' name='t' value='student'/>
    </div>
-   <div class="form-group" style="<? echo ($passHide==true ? "display:none;":"")?>">
+   <div class="form-group" style="<? echo ($passHide==false ? "display:none;":"")?>">
       <input type="password" class="form-control"  id="password" aria-describedby="password" value='<? echo $password;?>' placeholder="Нууц үг" name="password">
       <? echo $passwordErr; ?>
    </div>
-   <div class="form-group" style="<? echo ($passHide==true ? "display:none;":"")?>">
+   <div class="form-group" style="<? echo ($passHide==false ? "display:none;":"")?>">
       <input type="password" class="form-control"  id="passwordConfirm" aria-describedby="passwordConfirm"value='<? echo $passwordConfirm;?>' placeholder="Нууц үг давт" name="passwordConfirm">
       <? echo $passwordConfirmErr; ?>
    </div>

@@ -117,6 +117,15 @@ function isNeedChangePass($username){
     return $query["changePass"];
 }
 
+function updateUserPassword($username, $password){
+    global $pdo;
+    $query = "update users set password=:password where userName=:username";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":username",$username);
+    $query->bindParam(":password",$password);
+    $query->execute();
+}
+
 /*
 -1 - username not found
 -2 - user blocked
@@ -147,7 +156,7 @@ function loginCheck($username, $password){
 }
 function updateUserChangePass($username,$changePass){
     global $pdo;
-    $query = "update table users SET changePass=:changepass where 
+    $query = "update  users SET changePass=:changepass where 
                 userName = :username";
     $query=$pdo->prepare($query);
     $query->bindParam(":username", $username);
@@ -157,7 +166,7 @@ function updateUserChangePass($username,$changePass){
 
 function updateUserIsBlocked($username,$isblocked){
     global $pdo;
-    $query = "update table users SET isBlocked=:isblocked where 
+    $query = "update  users SET isBlocked=:isblocked where 
                 userName = :username";
     $query=$pdo->prepare($query);
     $query->bindParam(":username", $username);
@@ -295,7 +304,7 @@ function checkPasswordsEqual($pass,$passConfirm){
 function checkCourseTaken($courseIndex){
     global $db;
     $studentID=findStudentID($_SESSION["username"]);;
-    $checkQR="select * from courseTakenHistory where 
+    $checkQR="select * from coursetakenhistory where 
         studentID ='{$studentID}' AND courseIndex='{$courseIndex}'";
     $checkQR = mysqli_query($db,$checkQR);
     if(!$checkQR){
@@ -311,7 +320,7 @@ function takeCourseByStudent($courses){
     global $db;
     $studentID=findStudentID($_SESSION["username"]);
     foreach($courses as $course){
-        $takeCourse = "insert into courseTakenHistory (studentID,courseIndex)
+        $takeCourse = "insert into coursetakenhistory (studentID,courseIndex)
         values ('{$studentID}','{$course}')";
         mysqli_query($db,$takeCourse);
     }

@@ -24,8 +24,10 @@ if(isAdmin($_SESSION['username'])){
             </tr>
         </thead>
         ";
-    if(isset($_POST["savePerUser"])){
+    if(isset($_POST["changePassSave"])){
         updateUserChangePass($_POST['username'], $_POST['changePass']);
+    }
+    if(isset($_POST["isBlockedSave"])){
         updateUserIsBlocked($_POST['username'], $_POST['isBlocked']);
     }
     while($user = $users->fetch()){
@@ -39,22 +41,33 @@ if(isAdmin($_SESSION['username'])){
                 <td> 
                 <div class='form-group'>
                 <input type='hidden' name='username' value='{$tempUser["userName"]}'>
-                <select id='isBlocked' name='isBlocked' class='form-control'>
-                <option  ".($tempUser['isBlocked']==1 ? 'selected':'')." value='1' >Тийм</option>
-                <option  ".($tempUser['isBlocked']==0 ? 'selected':'')." value='0' >Үгүй</option>
-                </select>
+                
+                <form method='post' action='#'>
+                    <select id='isBlocked' name='isBlocked' class='form-control'>
+                        <option  ".($tempUser['isBlocked']==1 ? 'selected':'')." value='1' >Тийм</option>
+                        <option  ".($tempUser['isBlocked']==0 ? 'selected':'')." value='0' >Үгүй</option>
+                    </select>
+                    <input type='submit' name='isBlockedSave' value='save'>
+                </form>
                 </div>
                   </td>
                 <td>
                 <div class='form-group'>
-                <select id='changePass' name='changePass' class='form-control'>
-                  <option  ".($tempUser['changePass']==1 ? 'selected':'')." value='1' >Тийм</option>
-                  <option  ".($tempUser['changePass']==0 ? 'selected':'')." value='0' >Үгүй</option>
-                </select>
+
+                <form method='post' action='#'>
+                <input type='hidden' name='username' value='{$tempUser["userName"]}'>
+                
+                    <select id='changePass' name='changePass' class='form-control'>
+                    <option  ".($tempUser['changePass']==1 ? 'selected':'')." value='1' >Тийм</option>
+                    <option  ".($tempUser['changePass']==0 ? 'selected':'')." value='0' >Үгүй</option>
+                    </select>
+                    <input type='submit' value='save' name='changePassSave'>
+                </form>
                 </div></td>
                 <td>{$tempUser["regDate"]}</td>
                 <td>
                     <input type='submit' class='btn btn-success btn-sm' name='savePerUser' value='Хадгалах'>
+                    
                     <form method='get' action='update.php'>
                         <button class='btn btn-success btn-sm' name='s_id' value='".findStudentID($_SESSION['username'])."'>Засах</button>
                     </form>

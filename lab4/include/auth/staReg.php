@@ -4,7 +4,7 @@
    ?>
 
 
-<form action="<? echo $site_url;?>/index.php?t=staff#signup" method="POST">
+<form action="<? echo $site_url;?>/index.php#signup" method="POST">
 
  <? 
  if(isset($passwordStatus)){
@@ -21,6 +21,7 @@
    <div class="form-group"  style="<? echo ($userType!="" && $errorStatus==false ? "display:none;":"")?>">
       <input type="text" class="form-control"  id="username" aria-describedby="userName" value='<? echo $userName; ?>' placeholder="Хэрэглэгчийн нэр" name="userName">
       <? echo $userNameErr; ?>
+      <input type='hidden' name='t' value='staff'>
    </div>
    <div class="form-group" style="<? echo ($passHide==true ? "display:none;":"")?>">
       <input type="password" class="form-control"  id="password" aria-describedby="password" value='<? echo $password;?>' placeholder="Нууц үг" name="password">

@@ -9,10 +9,18 @@
 <a href="<? echo $site_url;?>/index.php?t=student#signup">Student</a>
 <a href="<? echo $site_url;?>/index.php?t=staff#signup">Staff</a>
 <? 
-if(isset($_GET["t"])){
-    if($_GET["t"]=='student')
+if(isset($_POST["t"])){
+    if($_POST["t"]=='student')
         require "stuReg.php";   
-    elseif($_GET["t"]=='staff')
+    elseif($_POST["t"]=='staff')
         require "staReg.php";
-}?>
+}
+if(isset($_GET["t"])){
+   if($_GET["t"]=='student')
+       require "stuReg.php";   
+   elseif($_GET["t"]=='staff')
+       require "staReg.php";
+}
+
+?>
 
