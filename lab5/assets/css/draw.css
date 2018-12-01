@@ -1,0 +1,30 @@
+table tr td{
+    border: 1px solid black;
+    padding:30px 35px;
+}
+
+
+.color-btn{
+    padding:25px;
+    border:none;
+}
+
+.bg-red{
+    background-color: red;
+}
+
+.bg-black{
+    background-color: black;
+}
+
+.bg-yellow{
+    background-color: yellow;
+}
+
+.bg-lightgreen{
+    background-color: green;
+}
+
+.bg-blue{
+    background-color: LIGHTblue;
+}
