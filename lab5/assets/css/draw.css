@@ -1,3 +1,6 @@
+table{
+    display: inline;
+}
 table tr td{
     border: 1px solid black;
     padding:30px 35px;
