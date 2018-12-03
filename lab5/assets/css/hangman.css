@@ -1,0 +1,14 @@
+#answer{
+    margin: 10px 10px;
+}
+.answerkey{
+    display: inline;
+    padding:10px;
+    color: #fff;
+    margin: 10px 5px;
+    background-color: #105dd1;
+}
+
+#restartgame{
+    visibility: hidden;
+}
