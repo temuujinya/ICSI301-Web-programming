@@ -115,7 +115,7 @@ userBoard.forEach((onePixel)=>{
             userinput[parseInt(pixelNumber/10)][parseInt(pixelNumber%10)]=colorNumber;
             // checkCorrectColor(smile);            
         }else{
-            alert("Өнгөө сонго чөөгий");
+            alert("Өнгөө сонго ");
         }
         
     },false);
@@ -138,7 +138,7 @@ colorBtns.forEach((colorBtn)=>{
     },false)
 })
 
-gametime=3;
+gametime=30;
 seconds =gametime;
 startbtn = document.getElementById("startBTN");
 

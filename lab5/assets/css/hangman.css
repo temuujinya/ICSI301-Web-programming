@@ -12,3 +12,14 @@
 #restartgame{
     visibility: hidden;
 }
+
+#livecountlabel{
+    display: none;
+}
+
+#gamestatus{
+    width: 250px;
+    height: 300px;
+    /* display: none; */
+    background:url("../img/hangman/hangman0.png");
+}
