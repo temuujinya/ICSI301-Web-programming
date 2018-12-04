@@ -8,7 +8,6 @@ question=[
     ["Who is the third President of USA?","Thomas Jefferson","30"]
 ];
 
-
 questionField = document.getElementById("question");
 
 function isContain(key){
@@ -37,6 +36,10 @@ function drawAnswerField(){
 startBTN = document.getElementById("startgame");
 restartBTN = document.getElementById("restartgame");
 
+
+
+
+
 startBTN.addEventListener("click",()=>{
     currentQuestion = Math.floor(Math.random()*question.length);
     questionField.innerHTML = question[currentQuestion][0];
@@ -47,6 +50,13 @@ startBTN.addEventListener("click",()=>{
         console.log(
             isContain(e.key));
         locations = isContain(e.key);
+        if(locations.length>0){
+            console.log("hwllo");
+        }
+
+
+answerField = document.getElementById("answer");
+console.log(answerField.child(1));
         // console.log(locations == []);
     },false);
 
@@ -55,7 +65,3 @@ startBTN.addEventListener("click",()=>{
 restartBTN.addEventListener("click",()=>{
     document.location.reload();
 },false);
-
-
-
-
