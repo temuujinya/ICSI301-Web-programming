@@ -1,0 +1,19 @@
+{
+    "students":[
+        {
+            "ID":1,
+            "sisiID":"16b1seas3369",
+            "firstName":"Temuujin",
+            "program":"Software engineer"
+        }
+    ],
+    "courses":[
+        {
+            "ID":1,
+            "index":"ICSI200",
+            "name": "Algorith and programming",
+            "credit": 3,
+            "seast": 3
+        }
+    ]
+}
