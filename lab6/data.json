@@ -4,6 +4,27 @@
             "ID":1,
             "sisiID":"16b1seas3369",
             "firstName":"Temuujin",
+            "program":"Software engineer",
+            "enrolled":["ICSI200"]
+        },
+        {
+            "ID":2,
+            "sisiID":"16b1seas3340",
+            "firstName":"Bill Gates",
+            "program":"Software engineer",
+            "enrolled":[]
+        },
+        {
+            "ID":3,
+            "sisiID":"16b1seas3341",
+            "firstName":"Steve Jobs",
+            "program":"Software engineer",
+            "enrolled":["ICSI200","ICSI202"]
+        },
+        {
+            "ID":4,
+            "sisiID":"16b1seas3342",
+            "firstName":"Mark Zuckerberg",
             "program":"Software engineer"
         }
     ],
@@ -13,7 +34,37 @@
             "index":"ICSI200",
             "name": "Algorith and programming",
             "credit": 3,
-            "seast": 3
+            "seats": 3,
+            "takenSeat":2
+        },
+        {
+            "ID":2,
+            "index":"ICSI201",
+            "name": "Programming language C",
+            "credit": 3,
+            "seats": 3
+        },
+        {
+            "ID":3,
+            "index":"ICSI202",
+            "name": "Web programming",
+            "credit": 3,
+            "seats": 3,
+            "takenSeat": 1
+        },
+        {
+            "ID":4,
+            "index":"ICSI999",
+            "name": "Eternity",
+            "credit": 19,
+            "seats": 3
+        },
+        {
+            "ID":5,
+            "index":"ICSI888",
+            "name": "Мэдээллийн систем",
+            "credit": 2,
+            "seats": 3
         }
     ]
 }
