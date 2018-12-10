@@ -121,6 +121,9 @@ function displayCourses(courses, studentID){
         courseList.appendChild(newUlList);
         length++;
     }
+
+
+    courseList.innerHTML+="<tr><td colspan='5'><button id='confirmBTN' class='btn btn-success float-center'>БАТЛАХ</button></td></tr>";
 }
 
 /*
@@ -208,10 +211,17 @@ function addEnrolledCourse(student, courseIndex){
         // alert("credit heterlee");
         // TODO: disappear after moment or adding close btn fix duplicate
         doc = document.querySelector(".container");
+        if(!doc.querySelector("#overCredit")){
         error = document.createElement("div");
         error.classList= "alert alert-danger";
+        error.id="overCredit";
         error.innerText="Кредит хэмжээ 21-с хэтэрч байгаа тул тус хичээлийг сонгох боломжгүй";
-        doc.insertBefore(error,doc.childNodes[0]);
+        errorCloseBTN = document.createElement("button");
+            errorCloseBTN.innerText="X";
+            errorCloseBTN.classList="btn btn-danger btn-sm float-right ";
+        error.appendChild(errorCloseBTN);
+        doc.insertBefore(error,doc.childNodes[0]); 
+    }
         return false;
     }else{
         choosenCredit+=addCredit;
@@ -289,8 +299,21 @@ function selectedStdt(e){
                         e.innerText = "ЦУЦЛАХ";
                     }
                 }
+
+
+        overCredit = document.querySelector("#overCredit");
+        overCredit.addEventListener("click",()=>{
+            overCredit.remove();
+        },false);
+
+
             });
         });
+        document.getElementById("showJSON").innerHTML="";
+        confirmBTN = document.querySelector("#confirmBTN");
+        confirmBTN.addEventListener("click",()=>{
+            document.getElementById("showJSON").innerHTML=JSON.stringify(findStudentBySisiID(currentStudentID, myjson.students));
+        },false);
 
         // console.log(e.getAttribute("sisiid"));
         console.log(findStudentBySisiID(e.getAttribute("sisiid"),myjson.students));
