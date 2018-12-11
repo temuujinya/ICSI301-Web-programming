@@ -302,9 +302,12 @@ function selectedStdt(e){
 
 
         overCredit = document.querySelector("#overCredit");
-        overCredit.addEventListener("click",()=>{
-            overCredit.remove();
-        },false);
+        if(overCredit)
+            {
+                overCredit.addEventListener("click",()=>{
+                    overCredit.remove();
+                },false);
+        }
 
 
             });
