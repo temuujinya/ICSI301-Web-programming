@@ -1,0 +1,38 @@
+
+create table program(
+	programIndex varchar(8) not null unique,
+	programName varchar(50) not null,
+	issuedDate date not null,
+	constraint PK_Program primary key(programIndex)
+)
+
+create table student (
+    studentID varchar(15) not null UNIQUE,
+    lastName varchar(20) not null,
+    firstName varchar(20) not null,
+    gender enum('m','f') not null,
+    dob date not null,
+    programIndex varchar(8) not null,
+    password varchar(32) not null,
+    constraint PK_Student primary key(studentID),
+    constraint FK_StudentProgramIndex foreign key(programIndex) 
+      references program(programIndex)
+);
+
+
+create table course (
+	courseIndex varchar(8) unique not null,
+	courseName varchar(50) not null,
+	courseCredit tinyint not null,
+	constraint PK_course primary key(courseIndex)
+)
+
+create table courseTakenHistory(
+	studentID varchar(15) not null,
+	courseIndex varchar(8) not null,
+	takenDate date not null,
+	constraint FK_courseTakenHistoryStudentID foreign key(studentID) 
+            references student(studentID),
+	constraint FK_courseTakenHistoryCourseIndex foreign key(courseIndex)
+	   references course(courseIndex)
+)
