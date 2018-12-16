@@ -1,6 +1,6 @@
 <?php
 
-$con = "mysql:host=localhost;dbname=lab4;charset=utf8mb4";
+$con = "mysql:host=localhost;dbname=lab7;charset=utf8mb4";
 
 try{
     $pdo = new PDO($con, "root", "");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2018 at 06:02 AM
+-- Generation Time: Dec 16, 2018 at 09:45 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -57,8 +57,17 @@ INSERT INTO `course` (`courseIndex`, `courseName`, `courseCredit`) VALUES
 CREATE TABLE `courseTakenHistory` (
   `studentID` varchar(15) NOT NULL,
   `courseIndex` varchar(8) NOT NULL,
-  `takenDate` datetime DEFAULT CURRENT_TIMESTAMP
+  `takenDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `courseTakenHistory`
+--
+
+INSERT INTO `courseTakenHistory` (`studentID`, `courseIndex`, `takenDate`) VALUES
+('16b1seas3369', 'CSII203', '0000-00-00'),
+('16b1seas3369', 'ICSI201', '0000-00-00'),
+('16b1seas3369', 'CSII202', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -69,7 +78,7 @@ CREATE TABLE `courseTakenHistory` (
 CREATE TABLE `program` (
   `programIndex` varchar(8) NOT NULL,
   `programName` varchar(50) NOT NULL,
-  `issuedDate` datetime DEFAULT CURRENT_TIMESTAMP
+  `issuedDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -103,7 +112,6 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`studentID`, `lastName`, `firstName`, `gender`, `dob`, `programIndex`, `password`) VALUES
-('14b1seas0072', 'Rentsendorj', 'Javkhlan', 'm', '1996-05-06', 'D061303', '123456'),
 ('15b1seas3370', 'Steve', 'Jobs', 'm', '1997-08-02', 'D061302', '123456'),
 ('15b1seas3371', 'Bill', 'Gates', 'm', '1997-02-03', 'D061301', '123456'),
 ('16b1seas3369', 'Temuujin', 'Ya', 'm', '1998-01-01', 'D061302', '123456'),
@@ -125,7 +133,6 @@ ALTER TABLE `course`
 -- Indexes for table `courseTakenHistory`
 --
 ALTER TABLE `courseTakenHistory`
-  ADD PRIMARY KEY (`studentID`,`courseIndex`),
   ADD KEY `FK_courseTakenHistoryStudentID` (`studentID`),
   ADD KEY `FK_courseTakenHistoryCourseIndex` (`courseIndex`);
 
