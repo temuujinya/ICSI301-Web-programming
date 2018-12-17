@@ -9,6 +9,7 @@ function hashmin($pass){
     return $hashed;
 }
 
+
 function loginCheckUsername($username){
     global $pdo;
     $query = "select * from users where userName=:username";
