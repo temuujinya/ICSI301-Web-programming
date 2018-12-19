@@ -13,9 +13,8 @@ require_once __DIR__ ."/../config.php";
   <!-- For datepicker-->
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="<? echo $site_url;?>/public/style/main.css"/>
-  <script async src="<? echo $site_url;?>/public/script.js"></script>
 </head>
-<body>
+<body >
 <?
 if(isset($_COOKIE["studentID"])){
   include_once __DIR__."/navbar.php";

@@ -7,6 +7,8 @@
 
 <!-- For datepicker start-->
 <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
+<script async src="./public/js/main.js"></script>
+
 <script>
    $('#datepicker').datepicker({
        uiLibrary: 'bootstrap4',

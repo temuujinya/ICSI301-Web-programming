@@ -13,6 +13,9 @@
       <li class="nav-item">
         <a class="nav-link" href="./courses.php">Хичээлүүд</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./programs.php">Хөтөлбөр</a>
+      </li>
       <? if(isAdmin($_SESSION["username"])){ ?>
       <li class="nav-item">
         <a class="nav-link" href="./users.php">Хэрэглэгчид</a>
