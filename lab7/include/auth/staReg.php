@@ -21,6 +21,7 @@
    <div class="form-group"  style="<? echo ($userType!="" && $errorStatus==false ? "display:none;":"")?>">
       <input type="text" class="form-control"  id="username" aria-describedby="userName" value='<? echo $userName; ?>' placeholder="Хэрэглэгчийн нэр" name="userName">
       <? echo $userNameErr; ?>
+      <div id="usernameDuplicate"></div>
       <input type='hidden' name='t' value='staff'>
    </div>
    <div class="form-group" style="<? echo ($passHide==true ? "display:none;":"")?>">

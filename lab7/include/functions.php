@@ -9,6 +9,19 @@ function hashmin($pass){
     return $hashed;
 }
 
+function findAllStudentsByProgram($program){
+    global $pdo;
+    $query = "select * from student where programIndex=:program";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":program",$program);
+    $query->execute();
+    if($query->rowCount()>0){
+        return $query;
+    }else{
+        return false;
+    }
+}
+
 function loginCheckUsername($username){
     global $pdo;
     $query = "select * from users where userName=:username";
@@ -300,10 +313,24 @@ function checkPasswordsEqual($pass,$passConfirm){
     }
 }
 
+function isUserProgram($programIndex, $studentID){
+    global $db;
+    $studentID=findStudentID($_SESSION["username"]);
+    $checkQR="select * from student where 
+    studentID ='{$studentID}' AND programIndex='{$programIndex}'";
+    $checkQR = mysqli_query($db,$checkQR);
+    if(!$checkQR){
+        die("erro".mysqli_error($db));
+    }
+    if(mysqli_num_rows($checkQR)<=0){
+        return false;      
+    }
+    return true;
+}
 
 function checkCourseTaken($courseIndex){
     global $db;
-    $studentID=findStudentID($_SESSION["username"]);;
+    $studentID=findStudentID($_SESSION["username"]);
     $checkQR="select * from coursetakenhistory where 
         studentID ='{$studentID}' AND courseIndex='{$courseIndex}'";
     $checkQR = mysqli_query($db,$checkQR);
@@ -324,6 +351,13 @@ function takeCourseByStudent($courses){
         values ('{$studentID}','{$course}')";
         mysqli_query($db,$takeCourse);
     }
+}
+
+function selectProgram($program){
+    global $db;
+    $studentID=findStudentID($_SESSION["username"]);
+        $choosenProgram = "update student set programIndex='{$program}' where studentID = '{$studentID}'";
+        mysqli_query($db,$choosenProgram);
 }
 
 function sanitizeString($var){
