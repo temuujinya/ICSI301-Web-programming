@@ -22,6 +22,19 @@ function findAllStudentsByProgram($program){
     }
 }
 
+function findAllCoursesByProgram($program){
+    global $pdo;
+    $query = "select * from course where program=:program";
+    $query = $pdo->prepare($query);
+    $query->bindParam(":program",$program);
+    $query->execute();
+    if($query->rowCount()>0){
+        return $query;
+    }else{
+        return false;
+    }
+}
+
 function loginCheckUsername($username){
     global $pdo;
     $query = "select * from users where userName=:username";
@@ -243,6 +256,38 @@ function findAllProgram(){
     return $query;
 }
 
+function findStudentProgramByID($studentID){
+    global $pdo;
+    $query = "select programIndex from student where studentID='{$studentID}'";
+    $query = $pdo->prepare($query);
+    $query->execute();
+    return $query;
+}
+
+function findAllProgramCourses($index){
+    global $pdo;
+    $query = "select * from course where programIndex ="+$index;
+    $query = $pdo->prepare($query);
+    $query->execute();
+    return $query;
+}
+
+
+function find_student_by_id($id, $option = [])
+{
+    global $db;
+
+    $sql = 'SELECT * FROM student ';
+    $sql .= "WHERE studentID='${$id}' ";
+    // echo $sql;
+    $result = mysqli_query($db, $sql);
+    // confirm_result_set($result);
+    $student = mysqli_fetch_assoc($result);
+    // mysqli_free_result($result);
+
+    return $student; // returns an assoc. array
+}
+
 function findAllUsers(){
     global $pdo;
     $query = "select * from users";
@@ -343,13 +388,41 @@ function checkCourseTaken($courseIndex){
     return true;
 }
 
+function find_all_course_enrollment_by_student_id($id)
+{
+    global $db;
+
+    $sql = 'SELECT * FROM coursetakenhistory ';
+    $sql .= "WHERE studentID='".$id."' ";
+    $sql .= 'ORDER BY courseIndex ';
+    $result = mysqli_query($db, $sql);
+    // confirm_result_set($result);
+
+    return $result;
+}
+
+function find_all_course()
+    {
+        global $db;
+
+        $sql = 'SELECT * FROM course ';
+        $sql .= 'ORDER BY courseIndex ASC';
+        $result = mysqli_query($db, $sql);
+        // confirm_result_set($result);
+
+        return $result;
+    }
+
+
 function takeCourseByStudent($courses){
     global $db;
     $studentID=findStudentID($_SESSION["username"]);
     foreach($courses as $course){
         $takeCourse = "insert into coursetakenhistory (studentID,courseIndex)
         values ('{$studentID}','{$course}')";
-        mysqli_query($db,$takeCourse);
+        if(mysqli_query($db,$takeCourse)){
+            echo "alert('no')";
+        }
     }
 }
 

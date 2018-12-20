@@ -12,15 +12,13 @@ $students=[];
         while($student = $res->fetch())
         {
             $students["{$student["studentID"]}"]=[
-                "fname"=>"{$student["firstName"]}",
-                "lname"=>"{$student["lastName"]}",
-                "gender"=>"{$student["gender"]}",
-                "dob"=>"{$student["dob"]}",
-                "id"=>"{$student["studentID"]}",
-            ];
+            "fname"=>"{$student["firstName"]}",
+            "lname"=>"{$student["lastName"]}",
+            "gender"=>"{$student["gender"]}",
+            "dob"=>"{$student["dob"]}",
+            "id"=>"{$student["studentID"]}",
+        ];
         }
         echo json_encode($students);
     }
-
-
 }

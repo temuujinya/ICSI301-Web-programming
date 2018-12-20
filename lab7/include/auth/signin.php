@@ -24,6 +24,14 @@ require_once __DIR__."/../config.php";
       <input type="hidden" name="login" />
    </div>
 
+   <div>
+        <img id="captcha_code" src="./include/captcha.php" />
+        <input type="button" id="refresh-captcha" value="Refresh Captcha"/>
+    </div>
+    <div class="form-group">
+        <br/>
+        <input required type="text" name="captcha" id="captcha" class="demoInputBox"><br>
+    </div>
    <!--
       <div class="form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">

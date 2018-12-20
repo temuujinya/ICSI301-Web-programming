@@ -1,6 +1,7 @@
 <?
 
 require_once __DIR__."/include/init.php";
+
 if(!isAuthenticate()){
     echo "Nevter dahiad mangasaa";
     die();
@@ -73,4 +74,6 @@ if(1==1){
         header("location: ./index.php");
     }
     ?>    
-
+<script async>
+    // getStudentsOfProgram('<?php echo StudentProgramByID($id); ?>');
+</script>

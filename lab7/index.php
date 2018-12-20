@@ -7,6 +7,14 @@ $errorStatus=false;
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signin"])){
     $studentID =$_POST["loginID"];
     $studentPASS =$_POST["loginPass"];
+
+   $captcha = $_POST['captcha'] ?? '';
+
+       if ($captcha !== $_SESSION['captcha_code']) {
+           header('location: ./index.php?s');
+           $invalidLogin ="captcha error";
+       }else{
+
     if(loginCheck($studentID, $studentPASS)===true){
         if(isset($_POST["remember"])){
             setcookie("username",$studentID,time() + (86400 * 365));
@@ -25,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signin"])){
         $invalidLogin ="<div class='alert alert-danger' role='alert'>
                             Оюутны хувийн дугаар эсвэл нууц үг буруу байна.
                         </div>";
-    }
+    }}
 
     // $findStudentById = "select * from student where studentID='{$studentID}'";
     // $result = mysqli_query($db,$findStudentById);
@@ -270,3 +278,13 @@ mysqli_close($db);
 
 include_once __DIR__."/include/partials/footer.php";
 ?>
+
+
+<script>
+    window.onload = function() {
+        var refreshCaptchaBtn = document.getElementById('refresh-captcha');
+        refreshCaptchaBtn.addEventListener('click', () => {
+            refreshCaptcha();
+        });
+    };
+</script>

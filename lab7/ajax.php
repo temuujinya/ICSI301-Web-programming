@@ -82,8 +82,10 @@
 
         if (isset($_POST['confirm'])) {
             header('Content-Type: application/json');
+            
             $data = json_decode($_POST['confirm'], true);
-            if (sizeof($data['sab1'])) {
+            console.log($data);
+            if (sizeof($data['sab3'])) {
                 echo 'Confirmed '.json_encode($data);
             } else {
                 echo 'Must Enroll At least one course, or contact staff.';
